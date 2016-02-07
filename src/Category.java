@@ -1,14 +1,32 @@
-import javax.annotation.Generated;
 
+
+import javax.annotation.Generated;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 @Generated("org.jsonschema2pojo")
 public class Category {
 
+    @SerializedName("id")
+    @Expose
     private int id;
+    @SerializedName("title")
+    @Expose
     private String title;
-    private String createdAt;
-    private String updatedAt;
+    @SerializedName("created_at")
+    @Expose
+    private Date createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private Date updatedAt;
+    @SerializedName("clues_count")
+    @Expose
     private int cluesCount;
+
+    private ArrayList<Clue> clueArrayList;
 
     /**
      *
@@ -51,7 +69,7 @@ public class Category {
      * @return
      *     The createdAt
      */
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
@@ -60,7 +78,7 @@ public class Category {
      * @param createdAt
      *     The created_at
      */
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -69,7 +87,7 @@ public class Category {
      * @return
      *     The updatedAt
      */
-    public String getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
@@ -78,7 +96,7 @@ public class Category {
      * @param updatedAt
      *     The updated_at
      */
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 
@@ -99,7 +117,5 @@ public class Category {
     public void setCluesCount(int cluesCount) {
         this.cluesCount = cluesCount;
     }
-
-
 
 }
