@@ -12,7 +12,7 @@ public class GetJSONData {
 
 
     private String urlString;
-    //Add parameters in subclasses here.
+    //Add query parameters in subclasses here.
     private URL urlObject;
     private HttpURLConnection httpURLConnection;
     private int responseCode;
