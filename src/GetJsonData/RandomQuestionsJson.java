@@ -1,13 +1,13 @@
 package GetJsonData;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 
 
 public class RandomQuestionsJson extends GetJSONData{
 
+    String countParameter = "?count=";
     int count;
-    public RandomQuestionsJson() throws MalformedURLException {
+    public RandomQuestionsJson() {
         super("http://jservice.io/api/random");
     }
 
@@ -21,8 +21,12 @@ public class RandomQuestionsJson extends GetJSONData{
         this.count = count;
     }
 
-    public String getRandomClueWithCount() throws IOException {
-        setUrl(getUrlString() + "?count=" + count);
-        return getGsonResponse();
+    public void getOneRandomCluesFromWeb() throws IOException {
+        getJsonFromWeb();
+    }
+
+    public void getRandomCluesWithCount() throws IOException {
+        setUrl(getUrlString() + countParameter + count);
+
     }
 }
