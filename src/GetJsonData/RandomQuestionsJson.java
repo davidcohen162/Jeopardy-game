@@ -5,10 +5,9 @@ import java.io.IOException;
 
 public class RandomQuestionsJson extends GetJSONData{
 
-    String countParameter = "?count=";
     int count;
     public RandomQuestionsJson() {
-        super("http://jservice.io/api/random");
+        super("http://jservice.io/api/random?");
     }
 
 
@@ -26,7 +25,6 @@ public class RandomQuestionsJson extends GetJSONData{
     }
 
     public void getRandomCluesWithCount() throws IOException {
-        setUrl(getUrlString() + countParameter + count);
-
+        setUrl(getUrlString() +  + count);
     }
 }

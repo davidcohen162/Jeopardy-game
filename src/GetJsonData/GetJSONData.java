@@ -3,13 +3,17 @@ package GetJsonData;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class GetJSONData {
 
 
+//    The base url of the api, in this case http://jservice.io/api/
     private String urlString;
-    //Add query parameters in subclasses here.
+    //Add query parameters here, as needed.
+    private HashMap<String, Integer> parameters;
     private String jsonResponse;
 
     public GetJSONData(String urlString) {
@@ -41,6 +45,9 @@ public class GetJSONData {
         }
     }
 
+    public void addParameterQuery (String queryName, int value) {
+        parameters.put(queryName, value);
+    }
 
 
     public String getJsonResponse() {
