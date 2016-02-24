@@ -16,7 +16,7 @@ public class RandomQuestionsJson extends GetJSONData{
         addParameterQuery(countQuery, count);
     }
 
-    public void getOneRandomCluesFromWeb() throws IOException {
+    public void getOneRandomClueFromWeb() throws IOException {
         getJsonFromWeb();
     }
 
