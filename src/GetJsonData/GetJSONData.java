@@ -1,5 +1,6 @@
 package GetJsonData;
 
+import com.google.gson.Gson;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -8,7 +9,7 @@ import java.util.Set;
 
 public class GetJSONData {
 
-
+    protected static Gson gson = new Gson();
     //    The base url of the api, in this case http://jservice.io/api/
     private String baseUrlString;
     //Add query parameters here, as needed.
