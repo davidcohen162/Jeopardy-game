@@ -25,7 +25,7 @@ public class GetJSONData {
         return baseUrlString;
     }
 
-    public void setUrl(String urlString) {
+    public void setBaseUrlStringUrl(String urlString) {
         this.baseUrlString = urlString;
     }
 
