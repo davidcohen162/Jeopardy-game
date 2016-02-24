@@ -9,7 +9,7 @@ import java.util.Set;
 public class GetJSONData {
 
 
-//    The base url of the api, in this case http://jservice.io/api/
+    //    The base url of the api, in this case http://jservice.io/api/
     private String baseUrlString;
     //Add query parameters here, as needed.
     protected HashMap<String, Integer> parameters;
@@ -30,7 +30,7 @@ public class GetJSONData {
     }
 
 
-    public void getJsonFromWeb () throws IOException {
+    public void getJsonFromWeb() throws IOException {
 
         Request request = new Request.Builder()
                 .url(this.baseUrlString)
@@ -47,10 +47,8 @@ public class GetJSONData {
 
     public void getJsonFromWebWithQueries(Set<String> keys) throws IOException {
         String parameters = "?";
-        for(String key : keys)
-        {
-            if (this.parameters.containsKey(key))
-            {
+        for (String key : keys) {
+            if (this.parameters.containsKey(key)) {
                 parameters += key + "=" + this.parameters.get(key) + "&";
             } else {
                 throw new RuntimeException("Parameter not set.");
@@ -69,12 +67,11 @@ public class GetJSONData {
         }
     }
 
-    protected void addParameterQuery (String queryName, int value) {
+    protected void addParameterQuery(String queryName, int value) {
         parameters.put(queryName, value);
     }
 
-    protected void removeQueryParameter(String queryName)
-    {
+    protected void removeQueryParameter(String queryName) {
         parameters.remove(queryName);
     }
 

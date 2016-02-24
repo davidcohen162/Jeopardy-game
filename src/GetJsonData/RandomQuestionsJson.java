@@ -3,7 +3,7 @@ package GetJsonData;
 import java.io.IOException;
 
 
-public class RandomQuestionsJson extends GetJSONData{
+public class RandomQuestionsJson extends GetJSONData {
     String countQuery = "count";
 
     public RandomQuestionsJson() {
@@ -11,7 +11,7 @@ public class RandomQuestionsJson extends GetJSONData{
     }
 
 
-//    limited to 100
+    //    limited to 100
     public void setCountParameter(int count) {
         addParameterQuery(countQuery, count);
     }
@@ -20,7 +20,7 @@ public class RandomQuestionsJson extends GetJSONData{
         getJsonFromWeb();
     }
 
-//    Assumes count was set
+    //    Assumes count was set
     public void getRandomCluesWithCount() throws IOException {
         getJsonFromWebWithQueries(parameters.keySet());
     }
