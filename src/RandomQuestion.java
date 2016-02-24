@@ -18,7 +18,8 @@ public class RandomQuestion {
     protected ArrayList<String> answerStringArrayList = new ArrayList<>(answerCount + 1);
 
 
-    public RandomQuestion() {}
+    public RandomQuestion() {
+    }
 
     public static RandomQuestion getRandomQuestion() throws IOException {
         RandomQuestion randomQuestion = new RandomQuestion();

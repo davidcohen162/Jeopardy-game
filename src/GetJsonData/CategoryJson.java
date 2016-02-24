@@ -5,16 +5,18 @@ import Questions.Category;
 import java.io.IOException;
 
 
-public class CategoryJson extends GetJSONData{
+public class CategoryJson extends GetJSONData {
     public CategoryJson() {
         super("http://jservice.io/api/category");
     }
+
     String idQuery = "id";
 
     private void setCategoryId(int id) {
         addParameterQuery(idQuery, id);
     }
-    public void getCategoryFromWeb (int id) throws IOException {
+
+    public void getCategoryFromWeb(int id) throws IOException {
         setCategoryId(id);
         getJsonFromWebWithQueries(parameters.keySet());
     }
