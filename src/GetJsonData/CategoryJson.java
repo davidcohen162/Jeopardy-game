@@ -4,9 +4,7 @@ import Questions.Category;
 
 import java.io.IOException;
 
-/**
- * Created by Yehuda Globerman on 2/23/2016.
- */
+
 public class CategoryJson extends GetJSONData{
     public CategoryJson() {
         super("http://jservice.io/api/category");
