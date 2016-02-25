@@ -13,7 +13,7 @@ public class GetJSONData {
     //    The base url of the api, in this case http://jservice.io/api/
     private String baseUrlString;
     //Add query parameters here, as needed.
-    protected HashMap<String, Integer> parameters;
+    private HashMap<String, String> parameters;
     private static OkHttpClient client = new OkHttpClient();
     private String jsonResponse;
 
@@ -30,8 +30,9 @@ public class GetJSONData {
         this.baseUrlString = urlString;
     }
 
-
-    public void getJsonFromWeb() throws IOException {
+//  This method gets json data from the web. It doesn't use any query parameters.
+//    It uses the okhttp library for the web requests.
+    public void requestJsonFromWeb() throws IOException {
 
         Request request = new Request.Builder()
                 .url(this.baseUrlString)
@@ -46,7 +47,9 @@ public class GetJSONData {
         }
     }
 
-    public void getJsonFromWebWithQueries(Set<String> keys) throws IOException {
+//    Same as above but with queries. Accepts a set to limit which queries to use; you can just use the
+//    Map.keyset as the set to use all queries.
+    public void requestJsonFromWebWithQueries(Set<String> keys) throws IOException {
         String parameters = "?";
         for (String key : keys) {
             if (this.parameters.containsKey(key)) {
@@ -68,7 +71,7 @@ public class GetJSONData {
         }
     }
 
-    protected void addParameterQuery(String queryName, int value) {
+    protected void addParameterQuery(String queryName, String value) {
         parameters.put(queryName, value);
     }
 
@@ -76,6 +79,17 @@ public class GetJSONData {
         parameters.remove(queryName);
     }
 
+    protected String getQueryValue(String queryKey) {
+        if (parameters.containsKey(queryKey)) {
+            return parameters.get(queryKey);
+        } else {
+            throw new RuntimeException("Key not found");
+        }
+    }
+
+    public HashMap<String, String> getParameters() {
+        return parameters;
+    }
 
     public String getLastJsonResponse() {
         return this.jsonResponse;

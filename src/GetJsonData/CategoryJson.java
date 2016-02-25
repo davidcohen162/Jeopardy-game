@@ -9,18 +9,19 @@ public class CategoryJson extends GetJSONData{
     public CategoryJson() {
         super("http://jservice.io/api/category");
     }
-    String idQuery = "id";
+    public static final String idQuery = "id";
 
     private void setCategoryId(int id) {
-        addParameterQuery(idQuery, id);
+        addParameterQuery(idQuery, Integer.toString(id));
     }
-    public void getCategoryFromWeb (int id) throws IOException {
+
+    public void requestCategoryJsonFromWeb(int id) throws IOException {
         setCategoryId(id);
-        getJsonFromWebWithQueries(parameters.keySet());
+        requestJsonFromWebWithQueries(getParameters().keySet());
     }
 
     public Category getCategory(int id) throws IOException {
-        getCategoryFromWeb(id);
+        requestCategoryJsonFromWeb(id);
         Category category = gson.fromJson(getLastJsonResponse(), Category.class);
         return category;
     }

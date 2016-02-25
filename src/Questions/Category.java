@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Generated("org.jsonschema2pojo")
 public class Category {
@@ -130,6 +131,12 @@ public class Category {
         return clues;
     }
 
+    Random rand = new Random();
+    public Clue getRandomClue() {
+        Clue cl = clues.get(rand.nextInt(clues.size()));
+        clues.remove(cl);
+        return cl;
+    }
     /**
      *
      * @param clues
