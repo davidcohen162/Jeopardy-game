@@ -1,20 +1,16 @@
 import GetJsonData.CategoryJson;
-import GetJsonData.RandomQuestionsJson;
-import Questions.Category;
 import Questions.Clue;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
 
 
 public class RandomQuestion extends Question{
 
-    private static RandomQuestionsJson RandClueJson = new RandomQuestionsJson();
+    protected CategoryJson categoryJson = new CategoryJson();
 
+    public RandomQuestion(Clue clue) throws IOException {
+        super(clue);
 
-    public RandomQuestion(RandomQuestionsJson RandClueJson) throws IOException {
-        super(RandClueJson);
+        setAnswers(categoryJson.getCategory(CLUE.getCategoryId()).getClues());
     }
 }

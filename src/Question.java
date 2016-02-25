@@ -1,16 +1,12 @@
-import GetJsonData.CategoryJson;
-import GetJsonData.GetJSONData;
-import GetJsonData.RandomQuestionsJson;
-import Questions.Category;
+
 import Questions.Clue;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class Question {
-    protected CategoryJson categoryJson = new CategoryJson();
 
     protected final Clue CLUE;
     //    INCORRECT_ANSWER_CHOICES controls how many false answers choices there are in a question.
@@ -18,35 +14,28 @@ public class Question {
 
     protected final ArrayList<String> ANSWER_STRING_ARRAY_LIST = new ArrayList<>(INCORRECT_ANSWER_CHOICES + 1);
 
-    public Question(Category category) {
-        CLUE = category.getRandomClue();
 
-        setAnswers(category);
+    public Question(Clue clue, ArrayList<Clue> cluesList) {
+        this.CLUE = clue;
+
+        setAnswers(cluesList);
     }
 
-    public Question(RandomQuestionsJson RandClueJson) throws IOException {
-        CLUE = RandClueJson.getRandomClueBasedOnLastRequest();
-
-        Category category;
-        category = categoryJson.getCategory(CLUE.getCategoryId());
-        setAnswers(category);
+    public Question(Clue clue) {
+        this.CLUE = clue;
     }
 
 
-    protected void setAnswers(Category category) {
+    //If the List is small, duplicate answers are likely to occur.
+    protected void setAnswers(List<Clue> cluesList) {
         ANSWER_STRING_ARRAY_LIST.add(this.CLUE.getAnswer());
         Random random = new Random();
 
-        ArrayList<Clue> clueArray = (ArrayList<Clue>) category.getClues();
-
-        for (int i = 0; i < INCORRECT_ANSWER_CHOICES && i < clueArray.size(); i++) {
-            ANSWER_STRING_ARRAY_LIST.add(clueArray.get(random.nextInt(clueArray.size())).getAnswer());
+        for (int i = 0; i < INCORRECT_ANSWER_CHOICES; i++) {
+            ANSWER_STRING_ARRAY_LIST.add(cluesList.get(random.nextInt(cluesList.size())).getAnswer());
         }
 
         Collections.shuffle(ANSWER_STRING_ARRAY_LIST);
     }
 
-    public boolean choiceIsCorrect(String choice) {
-        return choice.equalsIgnoreCase(this.CLUE.getAnswer());
-    }
 }
