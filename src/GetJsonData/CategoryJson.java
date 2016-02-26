@@ -6,10 +6,12 @@ import java.io.IOException;
 
 
 public class CategoryJson extends GetJSONData{
+
+    public static final String idQuery = "id";
+
     public CategoryJson() {
         super("http://jservice.io/api/category");
     }
-    public static final String idQuery = "id";
 
     private void setCategoryId(int id) {
         addParameterQuery(idQuery, Integer.toString(id));

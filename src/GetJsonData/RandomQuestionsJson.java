@@ -1,6 +1,7 @@
 package GetJsonData;
 
 import Questions.Clue;
+
 import java.io.IOException;
 
 
@@ -34,4 +35,9 @@ public class RandomQuestionsJson extends GetJSONData {
         return clues[0];
     }
 
+    public Clue[] getManyRandomClueObjects(int amount) throws IOException {
+        requestMultipleRandomCluesJson(amount);
+        Clue[] clues = gson.fromJson(getLastJsonResponse(), Clue[].class);
+        return clues;
+    }
 }
