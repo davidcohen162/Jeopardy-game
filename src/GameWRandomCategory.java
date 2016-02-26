@@ -12,36 +12,45 @@ public class GameWRandomCategory extends Game {
 
     private final int numberOfCategories = 25;
 
-    public GameWRandomCategory(int amountOfCluesInCategory) {
+    public GameWRandomCategory(int amountOfCluesInCategory) throws IOException {
         super(amountOfCluesInCategory);
+        setUpQuestions();
     }
 
     public void setUpQuestions() throws IOException {
-        CategoriesJson catJson = new CategoriesJson();
-        Category[] categories;
         Random rand = new Random();
         List<Question> questionList = new ArrayList<>(getAmountOfQuestions());
+        Category category = getValidCategories(1).get(0);
 
-        int offset;
-        boolean foundValidCategory = false;
-        while (!foundValidCategory) {
+        for (int i = 0; i < getAmountOfQuestions(); i++) {
+            questionList.add(new Question(category.getClues().get(rand.nextInt(category.getClues().size())), (ArrayList<Clue>) category.getClues()));
+        }
 
+        setGameQuestions(new GameQuestions(questionList));
+    }
+
+    public ArrayList<Category> getValidCategories(int amount) throws IOException {
+        CategoriesJson catJson = new CategoriesJson();
+        Category[] categories;
+        ArrayList<Category> catArrayList = new ArrayList<>(amount);
+        Random rand = new Random();
+
+        int j = 0, offset;
+        while (j < amount) {
             offset = rand.nextInt(CategoriesJson.MAX_OFFSET - 25);
             categories = catJson.getArrayOfCategories(25, offset);
 
             int i = 0;
-            while (i < categories.length && !foundValidCategory) {
+            while (i < categories.length && j < amount) {
                 if (categories[i].getCluesCount() > getAmountOfCluesInCategory()) {
-                    foundValidCategory = true;
-
-                    for (int j = 0; j < getAmountOfQuestions(); j++) {
-                        questionList.add(new Question(categories[i].getClues().get(rand.nextInt(categories[i].getClues().size())), (ArrayList<Clue>) categories[i].getClues()));
-                    }
+                    catArrayList.add(categories[i]);
+                    i++;
+                    j++;
                 }
             }
         }
-        setGameQuestions(new GameQuestions(questionList));
+        return catArrayList;
     }
 
-
 }
+

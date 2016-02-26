@@ -22,9 +22,11 @@ public class GameWRandQuestions extends Game {
         while (i < getAmountOfQuestions()) {
             clues = randomQuestionsJson.getManyRandomClueObjects(10);
 
-            for (Clue c : clues) {
-                if (c.getCategory().getCluesCount() > getAmountOfCluesInCategory()) {
-                    questionList.add(new RandomQuestion(clues[i]));
+            int j = 0;
+            while (j < clues.length && i < getAmountOfQuestions()) {
+                if (clues[j].getCategory().getCluesCount() > getAmountOfCluesInCategory()) {
+                    questionList.add(new RandomQuestion(clues[j]));
+                    j++;
                     i++;
                 }
             }
