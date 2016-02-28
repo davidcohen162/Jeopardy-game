@@ -23,4 +23,14 @@ public class GameQuestions {
         return MAX_SCORE;
     }
 
+    //    to be called whenever you want to know the score. if game completes early, unanswered questions will be considered wrong.
+    public int getScore() {
+        int currentScore = 0;
+        for (Question aQuestion : this.questionsList) {
+            if (aQuestion.isAnsweredCorrectly()) {
+                currentScore += aQuestion.getCLUE().getValue();
+            }
+        }
+        return currentScore;
+    }
 }
