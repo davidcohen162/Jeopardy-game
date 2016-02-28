@@ -23,7 +23,4 @@ public class GameQuestions {
         return MAX_SCORE;
     }
 
-    public boolean answerChoiceIsCorrect(String choice, int questionNumber) {
-        return (choice.equalsIgnoreCase(questionsList.get(questionNumber).getCLUE().getAnswer()));
-    }
 }
