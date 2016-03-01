@@ -1,6 +1,9 @@
+package Game;
+
 import GetJsonData.CategoriesJson;
 import Questions.Category;
 import Questions.Clue;
+import Questions.Question;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,12 +11,12 @@ import java.util.List;
 import java.util.Random;
 
 
-public class GameWRandomCategory extends Game {
+public class GameInRandomCategory extends Game {
 
     private final int numberOfCategories = 25;
 
-    public GameWRandomCategory(int amountOfCluesInCategory) throws IOException {
-        super(amountOfCluesInCategory);
+    public GameInRandomCategory(int amountOfQuestions, int amountOfCluesInCategory) throws IOException {
+        super(amountOfQuestions, amountOfCluesInCategory);
         setUpQuestions();
     }
 

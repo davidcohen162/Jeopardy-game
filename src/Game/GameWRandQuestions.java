@@ -1,5 +1,9 @@
+package Game;
+
 import GetJsonData.RandomQuestionsJson;
 import Questions.Clue;
+import Questions.Question;
+import Questions.RandomQuestion;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,8 +12,8 @@ import java.util.List;
 public class GameWRandQuestions extends Game {
 
 
-    public GameWRandQuestions(int amountOfCluesInCategory) throws IOException {
-        super(amountOfCluesInCategory);
+    public GameWRandQuestions(int amountOfQuestions, int amountOfCluesInCategory) throws IOException {
+        super(amountOfQuestions, amountOfCluesInCategory);
         setUpQuestions();
     }
 
@@ -24,7 +28,7 @@ public class GameWRandQuestions extends Game {
 
             int j = 0;
             while (j < clues.length && i < getAmountOfQuestions()) {
-                if (clues[j].getCategory().getCluesCount() > getAmountOfCluesInCategory()) {
+                if (clues[j].getCategory().getCluesCount() >= getAmountOfCluesInCategory()) {
                     questionList.add(new RandomQuestion(clues[j]));
                     j++;
                     i++;

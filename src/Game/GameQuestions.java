@@ -1,3 +1,7 @@
+package Game;
+
+import Questions.Question;
+
 import java.util.List;
 
 
@@ -23,7 +27,7 @@ public class GameQuestions {
         return MAX_SCORE;
     }
 
-    //    to be called whenever you want to know the score. if game completes early, unanswered questions will be considered wrong.
+    //    to be called whenever you want to know the current score. if game completes early, unanswered questions will be considered wrong.
     public int getScore() {
         int currentScore = 0;
         for (Question aQuestion : this.questionsList) {
