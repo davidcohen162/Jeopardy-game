@@ -1,4 +1,4 @@
-import Questions.Clue;
+package Questions;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,14 +9,15 @@ public class Question {
     private final Clue CLUE;
     //    INCORRECT_ANSWER_CHOICES controls how many false answers choices there are in a question.
     private final int INCORRECT_ANSWER_CHOICES = 3;
+    private boolean answeredCorrectly = false;
 
     protected final ArrayList<String> ANSWER_STRING_ARRAY_LIST = new ArrayList<>(INCORRECT_ANSWER_CHOICES + 1);
 
 
-    public Question(Clue clue, ArrayList<Clue> cluesListOfSameCategory) {
+    public Question(Clue clue, ArrayList<Clue> listOfCluesInSameCategory) {
         this.CLUE = clue;
 
-        setAnswers(cluesListOfSameCategory);
+        setAnswers(listOfCluesInSameCategory);
     }
 
     public Question(Clue clue) {
@@ -38,5 +39,17 @@ public class Question {
 
     public Clue getCLUE() {
         return CLUE;
+    }
+
+    public boolean isAnsweredCorrectly() {
+        return answeredCorrectly;
+    }
+
+    private void setAnsweredCorrectly(boolean answeredCorrectly) {
+        this.answeredCorrectly = answeredCorrectly;
+    }
+
+    public void setAnsweredCorrectly(String answerChoice) {
+        setAnsweredCorrectly(answerChoice.equalsIgnoreCase(this.CLUE.getAnswer()));
     }
 }
