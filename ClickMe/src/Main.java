@@ -3,7 +3,7 @@ import javafx.stage.*;
 import javafx.scene.*; 
 import javafx.scene.layout.*; 
 import javafx.scene.control.*;
-public class ClickMe extends Application {    
+public class Main extends Application {    
 	public static void main(String[] args)    {        
 		launch(args);    
 		}
@@ -11,7 +11,8 @@ public class ClickMe extends Application {
 			Label qlbl;//The question label
 			Label plbl;//The player name label
 			Label mlbl;//The money amount label;
-			Button btn;        
+			Button btn;//The center select button  
+			
 		@Override public void start(Stage primaryStage)    {
 			//Create the labels
 			clbl=new Label();//The category label
@@ -22,20 +23,17 @@ public class ClickMe extends Application {
 			qlbl.setText("Question 1");//Displays the question number
 			plbl.setText("Anyone");//Displays player name
 			mlbl.setText("$"+89000);//Displays money amount
+			
+	       
+	        
 		//Create combo box for answers
-		ObservableList<String> options = 
-		FXCollections.observableArrayList(
-				        "1",
-				        "2",
-				        "3"
-				    );
+		
 
-		ComboBox ans=new ComboBox();
-		ans.setItems(options);
+		
 		
 		// Create the button       
 		btn = new Button();        
-		btn.setText("Click me please!");        
+		btn.setText("Select!");        
 		btn.setOnAction(e -> buttonClick());
         	// Add the labels and button to a layout pane        
 		BorderPane pane = new BorderPane();
@@ -45,16 +43,18 @@ public class ClickMe extends Application {
 		pane.setCenter(btn);  
 		pane.setBottom(mlbl);
 		// Add the layout pane to a scene        
-		Scene scene = new Scene(pane, 400, 250);//The numbers set the size
-        	// Finalize and show the stage        
-		primaryStage.setScene(scene);        
+		Scene scene2 = new Scene(pane, 400, 250);//The numbers set the size
+        // Finalize and show the stage        
+		primaryStage.setScene(scene2);        
 		primaryStage.setTitle("The Jeopardy game");        
-		primaryStage.show();    }        
+		primaryStage.show();   
+}        //The clicking method to lead to the choice combo box
 		public void buttonClick()    {        
-		if (btn.getText() == "Click me please!")        {         
-		btn.setText("You clicked me!");        }        
+		if (btn.getText() == "Select!")        {         
+			MessageBox.show("Choose an answer", "Choices");//Showing the combo box
+			}        
 		else        {          
-		btn.setText("Click me please!"); 
+		btn.setText("Select!"); 
 		}
 	}
 }
