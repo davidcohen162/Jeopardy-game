@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class GetJSONDataTest {
 
     private GetJSONData JsonData;
-    private String baseUrlOfAPI = "http://jservice.io/api/category?id=5";
+    private String baseUrlOfAPI = "http://jservice.io/api/category";
     private static String jsonForCategory5 = "";
 
     @BeforeClass
@@ -53,13 +53,13 @@ public class GetJSONDataTest {
 
     @Test
     public void testRequestJsonFromWeb() throws Exception {
+        JsonData.setBaseUrlStringUrl("http://jservice.io/api/category?id=5");
         JsonData.requestJsonFromWeb();
         assertEquals(jsonForCategory5, JsonData.getLastJsonResponse());
     }
 
     @Test
     public void testRequestJsonFromWebWithQueries() throws Exception {
-        baseUrlOfAPI = "http://jservice.io/api/";
         JsonData.addParameterQuery("id", "5");
         JsonData.requestJsonFromWebWithQueries(JsonData.getParametersMap().keySet());
 
@@ -68,7 +68,6 @@ public class GetJSONDataTest {
 
     @Test
     public void testAddParameterQuery() throws Exception {
-        baseUrlOfAPI = "http://jservice.io/api/";
         JsonData.addParameterQuery("id", "5");
 
         assertTrue(JsonData.getParametersMap().containsKey("id"));
@@ -77,7 +76,6 @@ public class GetJSONDataTest {
 
     @Test
     public void testRemoveQueryParameter() throws Exception {
-        baseUrlOfAPI = "http://jservice.io/api/";
         JsonData.addParameterQuery("id", "5");
         JsonData.removeQueryParameter("id");
 
@@ -86,7 +84,6 @@ public class GetJSONDataTest {
 
     @Test
     public void testGetQueryValue() throws Exception {
-        baseUrlOfAPI = "http://jservice.io/api/";
         JsonData.addParameterQuery("id", "5");
         assertEquals("5", JsonData.getParametersMap().get("id"));
     }
@@ -102,6 +99,7 @@ public class GetJSONDataTest {
 
     @Test
     public void testGetLastJsonResponse() throws Exception {
+        JsonData.setBaseUrlStringUrl("http://jservice.io/api/category?id=5");
         JsonData.requestJsonFromWeb();
         assertEquals(jsonForCategory5, JsonData.getLastJsonResponse());
     }
