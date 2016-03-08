@@ -71,11 +71,11 @@ public class GetJSONData {
         }
     }
 
-    protected void addParameterQuery(String queryName, String value) {
+    public void addParameterQuery(String queryName, String value) {
         parameters.put(queryName, value);
     }
 
-    protected void removeQueryParameter(String queryName) {
+    public void removeQueryParameter(String queryName) {
         parameters.remove(queryName);
     }
 
@@ -87,8 +87,8 @@ public class GetJSONData {
         }
     }
 
-    public HashMap<String, String> getParameters() {
-        return parameters;
+    public HashMap<String, String> getParametersMap() {
+        return new HashMap<>(parameters);
     }
 
     public String getLastJsonResponse() {

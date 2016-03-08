@@ -26,7 +26,7 @@ public class RandomQuestionsJson extends GetJSONData {
     //    Assumes count was set
     public void requestMultipleRandomCluesJson(int count) throws IOException {
         setCountParameter(count);
-        requestJsonFromWebWithQueries(getParameters().keySet());
+        requestJsonFromWebWithQueries(getParametersMap().keySet());
     }
 
     public Clue getRandomClueBasedOnLastRequest() throws IOException {

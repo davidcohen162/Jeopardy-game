@@ -19,7 +19,7 @@ public class CategoryJson extends GetJSONData{
 
     public void requestCategoryJsonFromWeb(int id) throws IOException {
         setCategoryId(id);
-        requestJsonFromWebWithQueries(getParameters().keySet());
+        requestJsonFromWebWithQueries(getParametersMap().keySet());
     }
 
     public Category getCategory(int id) throws IOException {

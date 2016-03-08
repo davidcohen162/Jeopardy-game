@@ -49,7 +49,7 @@ public static final int MAX_CATEGORIES_REQUEST = 100;
         setCountAmount(count);
         setOffsetAmount(offSet);
 
-        requestJsonFromWebWithQueries(getParameters().keySet());
+        requestJsonFromWebWithQueries(getParametersMap().keySet());
     }
 
     public Category[] getArrayOfCategories(int count, int offSet) throws IOException {
