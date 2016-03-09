@@ -29,7 +29,7 @@ public class RandomQuestionsJson extends GetJSONData {
         requestJsonFromWebWithQueries(getParametersMap().keySet());
     }
 
-    public Clue getRandomClueBasedOnLastRequest() throws IOException {
+    public Clue getRandomClueObject() throws IOException {
         requestRandomClueJsonFromWeb();
         Clue[] clues = gson.fromJson(getLastJsonResponse(), Clue[].class);
         return clues[0];
