@@ -1,39 +1,41 @@
 package GetJsonData;
 
+import com.google.gson.Gson;
 import okhttp3.*;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
-
+import java.util.Set;
 
 public class GetJSONData {
 
-
-//    The base url of the api, in this case http://jservice.io/api/
-    private String urlString;
+    protected static Gson gson = new Gson();
+    //    The base url of the api, in this case http://jservice.io/api/
+    private String baseUrlString;
     //Add query parameters here, as needed.
-    private HashMap<String, Integer> parameters;
+    private HashMap<String, String> parameters;
+    private static OkHttpClient client = new OkHttpClient();
     private String jsonResponse;
 
     public GetJSONData(String urlString) {
-        this.urlString = urlString;
+        this.baseUrlString = urlString;
+        parameters = new HashMap<>();
     }
 
-    public String getUrlString() {
-        return urlString;
+    public String getBaseUrlString() {
+        return baseUrlString;
     }
 
-    public void setUrl(String urlString) {
-        this.urlString = urlString;
+    public void setBaseUrlStringUrl(String urlString) {
+        this.baseUrlString = urlString;
     }
 
-
-    public void getJsonFromWeb () throws IOException {
-        OkHttpClient client = new OkHttpClient();
+//  This method gets json data from the web. It doesn't use any query parameters.
+//    It uses the okhttp library for the web requests.
+    public void requestJsonFromWeb() throws IOException {
 
         Request request = new Request.Builder()
-                .url(this.urlString)
+                .url(this.baseUrlString)
                 .build();
 
         Response response = client.newCall(request).execute();
@@ -45,12 +47,51 @@ public class GetJSONData {
         }
     }
 
-    public void addParameterQuery (String queryName, int value) {
+//    Same as above but with queries. Accepts a set to limit which queries to use; you can just use the
+//    Map.keyset as the set to use all queries.
+    public void requestJsonFromWebWithQueries(Set<String> keys) throws IOException {
+        String parameters = "?";
+        for (String key : keys) {
+            if (this.parameters.containsKey(key)) {
+                parameters += key + "=" + this.parameters.get(key) + "&";
+            } else {
+                throw new RuntimeException("Parameter not set.");
+            }
+        }
+        Request request = new Request.Builder()
+                .url(this.baseUrlString + parameters)
+                .build();
+
+        Response response = client.newCall(request).execute();
+
+        if (!response.isSuccessful()) {
+            throw new IOException("Unexpected code " + response);
+        } else {
+            this.jsonResponse = response.body().string();
+        }
+    }
+
+    protected void addParameterQuery(String queryName, String value) {
         parameters.put(queryName, value);
     }
 
+    protected void removeQueryParameter(String queryName) {
+        parameters.remove(queryName);
+    }
 
-    public String getJsonResponse() {
+    protected String getQueryValue(String queryKey) {
+        if (parameters.containsKey(queryKey)) {
+            return parameters.get(queryKey);
+        } else {
+            throw new RuntimeException("Key not found");
+        }
+    }
+
+    public HashMap<String, String> getParameters() {
+        return parameters;
+    }
+
+    public String getLastJsonResponse() {
         return this.jsonResponse;
     }
 

@@ -1,4 +1,8 @@
+package Questions;
+
 import javax.annotation.Generated;
+
+import Questions.Category;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -241,7 +245,7 @@ public class Clue {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Clue{");
+        final StringBuffer sb = new StringBuffer("Questions.Clue{");
         sb.append("airdate=").append(airdate);
         sb.append(", id=").append(id);
         sb.append(", answer='").append(answer).append('\'');

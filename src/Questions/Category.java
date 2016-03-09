@@ -1,4 +1,4 @@
-
+package Questions;
 
 import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 @Generated("org.jsonschema2pojo")
 public class Category {
@@ -25,8 +27,10 @@ public class Category {
     @SerializedName("clues_count")
     @Expose
     private int cluesCount;
+    @SerializedName("clues")
+    @Expose
+    private List<Clue> clues = new ArrayList<Clue>();
 
-    private ArrayList<Clue> clueArrayList;
 
     /**
      *
@@ -118,4 +122,27 @@ public class Category {
         this.cluesCount = cluesCount;
     }
 
+    /**
+     *
+     * @return
+     * The clues
+     */
+    public List<Clue> getClues() {
+        return clues;
+    }
+
+    Random rand = new Random();
+    public Clue getRandomClue() {
+        Clue cl = clues.get(rand.nextInt(clues.size()));
+        clues.remove(cl);
+        return cl;
+    }
+    /**
+     *
+     * @param clues
+     * The clues
+     */
+    public void setClues(List<Clue> clues) {
+        this.clues = clues;
+    }
 }

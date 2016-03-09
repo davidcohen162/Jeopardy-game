@@ -1,30 +1,43 @@
 package GetJsonData;
 
+import Questions.Clue;
+
 import java.io.IOException;
 
 
-public class RandomQuestionsJson extends GetJSONData{
+public class RandomQuestionsJson extends GetJSONData {
+    public static final String countQuery = "count";
 
-    int count;
     public RandomQuestionsJson() {
-        super("http://jservice.io/api/random?");
+        super("http://jservice.io/api/random");
     }
 
 
-    public int getCount() {
-        return count;
+    //    limited to 100
+    private void setCountParameter(int count) {
+        addParameterQuery(RandomQuestionsJson.countQuery, Integer.toString(count));
     }
 
-//    limited to 100
-    public void setCount(int count) {
-        this.count = count;
+
+    public void requestRandomClueJsonFromWeb() throws IOException {
+        requestJsonFromWeb();
     }
 
-    public void getOneRandomCluesFromWeb() throws IOException {
-        getJsonFromWeb();
+    //    Assumes count was set
+    public void requestMultipleRandomCluesJson(int count) throws IOException {
+        setCountParameter(count);
+        requestJsonFromWebWithQueries(getParameters().keySet());
     }
 
-    public void getRandomCluesWithCount() throws IOException {
-        setUrl(getUrlString() +  + count);
+    public Clue getRandomClueBasedOnLastRequest() throws IOException {
+        requestRandomClueJsonFromWeb();
+        Clue[] clues = gson.fromJson(getLastJsonResponse(), Clue[].class);
+        return clues[0];
+    }
+
+    public Clue[] getManyRandomClueObjects(int amount) throws IOException {
+        requestMultipleRandomCluesJson(amount);
+        Clue[] clues = gson.fromJson(getLastJsonResponse(), Clue[].class);
+        return clues;
     }
 }
