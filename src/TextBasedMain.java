@@ -14,17 +14,17 @@ public class TextBasedMain {
 
         for (int i = 0; i < questionsToAsk; i++) {
             System.out.println("Question: " + (i + 1) + " out of: " + gameInRandomCategory.getAmountOfQuestions() +
-                    "\t\tScore: " + gameInRandomCategory.getGameQuestions().getScore()
-                    + " out of: " + gameInRandomCategory.getGameQuestions().getMAX_SCORE());
+                    "\t\tScore: " + gameInRandomCategory.getScore()
+                    + " out of: " + gameInRandomCategory.getMaxScore());
 
-            System.out.println(gameInRandomCategory.getGameQuestions().getQuestionsList().get(i).getCLUE().getQuestion());
+            System.out.println(gameInRandomCategory.getQuestion(i));
 
-            for (int j = 0; j < gameInRandomCategory.getGameQuestions().getQuestionsList().get(i).INCORRECT_ANSWER_CHOICES + 1; j++) {
+            for (int j = 0; j < gameInRandomCategory.getQuestion(i).INCORRECT_ANSWER_CHOICES + 1; j++) {
                 System.out.println(j + 1 + ". "
-                        + gameInRandomCategory.getGameQuestions().getQuestionsList().get(i).getAnswerFromMultipleChoice(j));
+                        + gameInRandomCategory.getQuestion(i).getAnswerFromMultipleChoice(j));
             }
             input = keyboard.nextLine();
-            gameInRandomCategory.getGameQuestions().getQuestionsList().get(i).setAnsweredCorrectly(gameInRandomCategory.getGameQuestions().getQuestionsList().get(i).getAnswerFromMultipleChoice(Integer.parseInt(input) - 1));
+            gameInRandomCategory.getQuestion(i).setAnsweredCorrectly(gameInRandomCategory.getQuestion(i).getAnswerFromMultipleChoice(Integer.parseInt(input) - 1));
         }
     }
 

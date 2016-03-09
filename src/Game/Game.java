@@ -1,5 +1,7 @@
 package Game;
 
+import Questions.Question;
+
 public class Game {
     private final int amountOfQuestions;
     private final int amountOfCluesInCategory;  // will control the minimum amount of clues a cateogry has, too little means that the multiple choices might have duplicate answers.
@@ -25,6 +27,18 @@ public class Game {
 
     public int getAmountOfCluesInCategory() {
         return amountOfCluesInCategory;
+    }
+
+    public int getScore() {
+        return gameQuestions.getScore();
+    }
+
+    public int getMaxScore() {
+        return gameQuestions.getMAX_SCORE();
+    }
+
+    public Question getQuestion(int index) {
+        return gameQuestions.getQuestionsList().get(index);
     }
 
 
