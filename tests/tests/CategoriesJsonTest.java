@@ -51,6 +51,15 @@ public class CategoriesJsonTest {
     @Test
     public void testGetArrayOfCategories() throws IOException {
         Category[] categories = categoriesJson.getArrayOfCategories(amountOfCategoriesToGet, offset);
-        assertNotNull(categories);
+        assertNotNull(categories[0]);
+    }
+
+    @Test
+    public void GetArrayOfManyCategories() throws IOException {
+        Category[] categories = categoriesJson.getArrayOfCategories(10, offset);
+
+        for (Category c : categories) {
+            assertNotNull(c);
+        }
     }
 }

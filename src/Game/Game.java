@@ -9,7 +9,6 @@ public class Game {
     public Game(int amountOfQuestions, int amountOfCluesInCategory) {
         this.amountOfQuestions = amountOfQuestions;
         this.amountOfCluesInCategory = amountOfCluesInCategory;
-
     }
 
     public GameQuestions getGameQuestions() {

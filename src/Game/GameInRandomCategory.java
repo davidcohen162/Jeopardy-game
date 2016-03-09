@@ -1,6 +1,7 @@
 package Game;
 
 import GetJsonData.CategoriesJson;
+import GetJsonData.CategoryJson;
 import Questions.Category;
 import Questions.Clue;
 import Questions.Question;
@@ -13,17 +14,18 @@ import java.util.Random;
 
 public class GameInRandomCategory extends Game {
 
-    private final int numberOfCategories = 25;
 
     public GameInRandomCategory(int amountOfQuestions, int amountOfCluesInCategory) throws IOException {
         super(amountOfQuestions, amountOfCluesInCategory);
-        setUpQuestions();
+//        setUpQuestions();
     }
 
     public void setUpQuestions() throws IOException {
         Random rand = new Random();
+        CategoryJson json = new CategoryJson();
         List<Question> questionList = new ArrayList<>(getAmountOfQuestions());
-        Category category = getValidCategories(1).get(0);
+        Category category = json.getCategory(getValidCategories(1).get(0).getId());
+
 
         for (int i = 0; i < getAmountOfQuestions(); i++) {
             questionList.add(new Question(category.getClues().get(rand.nextInt(category.getClues().size())), (ArrayList<Clue>) category.getClues()));
@@ -32,27 +34,29 @@ public class GameInRandomCategory extends Game {
         setGameQuestions(new GameQuestions(questionList));
     }
 
-    public ArrayList<Category> getValidCategories(int amount) throws IOException {
+    public ArrayList<Category> getValidCategories(int amountOfCategoriesToGet) throws IOException {
         CategoriesJson catJson = new CategoriesJson();
-        Category[] categories;
-        ArrayList<Category> catArrayList = new ArrayList<>(amount);
+        Category[] notValidatedCategories;
+        ArrayList<Category> catArrayListWithEnoughQuestions = new ArrayList<>(amountOfCategoriesToGet);
         Random rand = new Random();
+        int amountOfCategoriesInOneRequest = 25;
 
         int j = 0, offset;
-        while (j < amount) {
-            offset = rand.nextInt(CategoriesJson.MAX_OFFSET - 25);
-            categories = catJson.getArrayOfCategories(25, offset);
+        while (j < amountOfCategoriesToGet) {
+            offset = rand.nextInt(CategoriesJson.MAX_OFFSET - amountOfCategoriesInOneRequest);
+            notValidatedCategories = catJson.getArrayOfCategories(amountOfCategoriesInOneRequest, offset);
 
             int i = 0;
-            while (i < categories.length && j < amount) {
-                if (categories[i].getCluesCount() > getAmountOfCluesInCategory()) {
-                    catArrayList.add(categories[i]);
-                    i++;
+            while (i < notValidatedCategories.length && j < amountOfCategoriesToGet) {
+                if (notValidatedCategories[i].getCluesCount() >= getAmountOfCluesInCategory()) {
+                    catArrayListWithEnoughQuestions.add(notValidatedCategories[i]);
                     j++;
                 }
+                i++;
             }
         }
-        return catArrayList;
+
+        return catArrayListWithEnoughQuestions;
     }
 
 }
