@@ -30,9 +30,9 @@ public class GameWRandQuestions extends Game {
             while (j < clues.length && i < getAmountOfQuestions()) {
                 if (clues[j].getCategory().getCluesCount() >= getAmountOfCluesInCategory()) {
                     questionList.add(new RandomQuestion(clues[j]));
-                    j++;
                     i++;
                 }
+                j++;
             }
         }
         setGameQuestions(new GameQuestions(questionList));
