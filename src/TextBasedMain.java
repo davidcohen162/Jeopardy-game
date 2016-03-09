@@ -17,7 +17,7 @@ public class TextBasedMain {
                     "\t\tScore: " + gameInRandomCategory.getScore()
                     + " out of: " + gameInRandomCategory.getMaxScore());
 
-            System.out.println(gameInRandomCategory.getQuestion(i));
+            System.out.println(gameInRandomCategory.getQuestion(i).getCLUE().getQuestion());
 
             for (int j = 0; j < gameInRandomCategory.getQuestion(i).INCORRECT_ANSWER_CHOICES + 1; j++) {
                 System.out.println(j + 1 + ". "

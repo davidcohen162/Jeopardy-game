@@ -13,7 +13,7 @@ import java.util.Random;
 
 
 public class GameInRandomCategory extends Game {
-
+    private Random rand = new Random();
 
     public GameInRandomCategory(int amountOfQuestions, int amountOfCluesInCategory) throws IOException {
         super(amountOfQuestions, amountOfCluesInCategory);
@@ -21,14 +21,15 @@ public class GameInRandomCategory extends Game {
     }
 
     public void setUpQuestions() throws IOException {
-        Random rand = new Random();
         CategoryJson json = new CategoryJson();
         List<Question> questionList = new ArrayList<>(getAmountOfQuestions());
+        Clue c;
         Category category = json.getCategory(getValidCategories(1).get(0).getId());
 
-
         for (int i = 0; i < getAmountOfQuestions(); i++) {
-            questionList.add(new Question(category.getClues().get(rand.nextInt(category.getClues().size())), (ArrayList<Clue>) category.getClues()));
+            c = category.getClues().get(rand.nextInt(category.getClues().size()));
+            questionList.add(new Question((c), (ArrayList<Clue>) category.getClues()));
+            category.getClues().remove(c);
         }
 
         setGameQuestions(new GameQuestions(questionList));
@@ -38,7 +39,6 @@ public class GameInRandomCategory extends Game {
         CategoriesJson catJson = new CategoriesJson();
         Category[] notValidatedCategories;
         ArrayList<Category> catArrayListWithEnoughQuestions = new ArrayList<>(amountOfCategoriesToGet);
-        Random rand = new Random();
         int amountOfCategoriesInOneRequest = 25;
 
         int j = 0, offset;

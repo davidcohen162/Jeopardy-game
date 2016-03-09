@@ -2,8 +2,11 @@ package tests;
 
 import GetJsonData.CategoryJson;
 import Questions.Category;
+import Questions.Clue;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -29,5 +32,14 @@ public class CategoryJsonTest {
     public void testGetCategory() throws Exception {
         Category category = catJson.getCategory(6);
         assertNotNull(category);
+    }
+
+    @Test
+    public void DoesGsonDeserializeClues() throws IOException {
+        Category category = catJson.getCategory(6);
+        for (Clue c : category.getClues()) {
+            assertNotNull(c);
+            assertNotNull(c.getQuestion());
+        }
     }
 }
