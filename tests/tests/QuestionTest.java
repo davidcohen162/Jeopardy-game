@@ -28,7 +28,7 @@ public class QuestionTest {
     @Test
     public void testSetAnswers() throws IOException {
         CategoryJson categoryJson = new CategoryJson();
-        question.setAnswers((ArrayList<Clue>) categoryJson.getCategory(question.getCLUE().getCategoryId()).getClues());
+        question.setAnswerMultipleChoice((ArrayList<Clue>) categoryJson.getCategory(question.getCLUE().getCategoryId()).getClues());
         for (int i = 0; i < question.INCORRECT_ANSWER_CHOICES + 1; i++) {
             assertNotNull(question.getAnswerFromMultipleChoice(i));
         }
@@ -42,7 +42,7 @@ public class QuestionTest {
     @Test
     public void testSetAnsweredCorrectly() throws IOException {
         CategoryJson categoryJson = new CategoryJson();
-        question.setAnswers((ArrayList<Clue>) categoryJson.getCategory(question.getCLUE().getCategoryId()).getClues());
+        question.setAnswerMultipleChoice((ArrayList<Clue>) categoryJson.getCategory(question.getCLUE().getCategoryId()).getClues());
 
         question.setAnsweredCorrectly(question.getCLUE().getAnswer());
 
@@ -52,7 +52,7 @@ public class QuestionTest {
     @Test
     public void answeredCorrectlyIsFalseWhenPassedAWrongAnswer() throws IOException {
         CategoryJson categoryJson = new CategoryJson();
-        question.setAnswers((ArrayList<Clue>) categoryJson.getCategory(question.getCLUE().getCategoryId()).getClues());
+        question.setAnswerMultipleChoice((ArrayList<Clue>) categoryJson.getCategory(question.getCLUE().getCategoryId()).getClues());
 
         question.setAnsweredCorrectly("The truth is like poetry. And most people hates poetry");
         assertFalse(question.isAnsweredCorrectly());

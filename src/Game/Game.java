@@ -2,44 +2,69 @@ package Game;
 
 import Questions.Question;
 
+import java.util.List;
+
 public class Game {
-    private final int amountOfQuestions;
-    private final int amountOfCluesInCategory;  // will control the minimum amount of clues a cateogry has, too little means that the multiple choices might have duplicate answers.
-    private GameQuestions gameQuestions;
+    private final int amountOfQuestionsInGame;
+    private final int amountOfCluesInCategory;  // will control the minimum amount of clues a cateogry has; too little means that the multiple choices might have duplicate answers.
+    private List<Question> questionsList;
+    private int MAX_SCORE;
 
 
-    public Game(int amountOfQuestions, int amountOfCluesInCategory) {
-        this.amountOfQuestions = amountOfQuestions;
-        this.amountOfCluesInCategory = amountOfCluesInCategory;
+    public Game(int amountOfQuestions) {
+        this.amountOfQuestionsInGame = amountOfQuestions;
+        this.amountOfCluesInCategory = amountOfQuestions * 4;
     }
 
-    public GameQuestions getGameQuestions() {
-        return gameQuestions;
+    public List<Question> getQuestionsList() {
+        return questionsList;
     }
 
-    public void setGameQuestions(GameQuestions gameQuestions) {
-        this.gameQuestions = gameQuestions;
+    protected void setQuestionsList(List<Question> q) {
+        questionsList = q;
+
+        int scoreAccum = 0;
+        for (Question question : questionsList) {
+            scoreAccum += question.getCLUE().getValue();
+        }
+        this.MAX_SCORE = scoreAccum;
     }
 
-    public int getAmountOfQuestions() {
-        return amountOfQuestions;
+    public Question getQuestion(int index) {
+        return questionsList.get(index);
+    }
+
+    //
+    public void setPlayersAnswer(int index, String playerChoice) {
+        getQuestion(index).setAnsweredCorrectly(playerChoice);
+    }
+
+    public boolean aQuestionWasAnsweredCorrectly(int index) {
+        return getQuestion(index).isAnsweredCorrectly();
+    }
+
+    public int getAmountOfQuestionsInGame() {
+        return amountOfQuestionsInGame;
     }
 
     public int getAmountOfCluesInCategory() {
         return amountOfCluesInCategory;
     }
 
-    public int getScore() {
-        return gameQuestions.getScore();
-    }
 
     public int getMaxScore() {
-        return gameQuestions.getMAX_SCORE();
+        return MAX_SCORE;
     }
 
-    public Question getQuestion(int index) {
-        return gameQuestions.getQuestionsList().get(index);
+    //    to be called whenever you want to know the current score. if game completes early, unanswered questions will be considered wrong.
+    public int getScore() {
+        int currentScore = 0;
+        for (Question aQuestion : this.questionsList) {
+            if (aQuestion.isAnsweredCorrectly()) {
+                currentScore += aQuestion.getCLUE().getValue();
+            }
+        }
+        return currentScore;
     }
-
 
 }

@@ -23,11 +23,11 @@ public class GameWRandQuestions extends Game {
         Clue[] clues;
 
         int i = 0;
-        while (i < getAmountOfQuestions()) {
+        while (i < getAmountOfQuestionsInGame()) {
             clues = randomQuestionsJson.getManyRandomClueObjects(10);
 
             int j = 0;
-            while (j < clues.length && i < getAmountOfQuestions()) {
+            while (j < clues.length && i < getAmountOfQuestionsInGame()) {
                 if (clues[j].getCategory().getCluesCount() >= getAmountOfCluesInCategory()) {
                     questionList.add(new RandomQuestion(clues[j]));
                     i++;
@@ -35,7 +35,7 @@ public class GameWRandQuestions extends Game {
                 j++;
             }
         }
-        setGameQuestions(new GameQuestions(questionList));
+        setQuestionsList(questionList);
     }
 
 

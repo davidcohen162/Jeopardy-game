@@ -13,7 +13,7 @@ public class TextBasedMain {
         gameInRandomCategory.setUpQuestions();
 
         for (int i = 0; i < questionsToAsk; i++) {
-            System.out.println("Question: " + (i + 1) + " out of: " + gameInRandomCategory.getAmountOfQuestions() +
+            System.out.println("Question: " + (i + 1) + " out of: " + gameInRandomCategory.getAmountOfQuestionsInGame() +
                     "\t\tScore: " + gameInRandomCategory.getScore()
                     + " out of: " + gameInRandomCategory.getMaxScore());
 

@@ -13,7 +13,7 @@ public class RandomQuestion extends Question {
     public RandomQuestion(Clue clue) throws IOException {
         super(clue);
 
-        setAnswers((ArrayList<Clue>) categoryJson.getCategory(getCLUE().getCategoryId()).getClues());
+        setAnswerMultipleChoice((ArrayList<Clue>) categoryJson.getCategory(getCLUE().getCategoryId()).getClues());
     }
 
 

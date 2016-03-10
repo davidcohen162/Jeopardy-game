@@ -24,7 +24,7 @@ public class GameInRandomCategoryTest {
     @Test
     public void testSetUpQuestions() throws Exception {
         randomCategory.setUpQuestions();
-        for (Question q : randomCategory.getGameQuestions().getQuestionsList()) {
+        for (Question q : randomCategory.getQuestionsList()) {
             assertNotNull(q);
         }
     }

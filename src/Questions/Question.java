@@ -16,7 +16,7 @@ public class Question {
     public Question(Clue clue, ArrayList<Clue> listOfCluesInSameCategory) {
         this.CLUE = clue;
 
-        setAnswers(listOfCluesInSameCategory);
+        setAnswerMultipleChoice(listOfCluesInSameCategory);
     }
 
     public Question(Clue clue) {
@@ -24,13 +24,13 @@ public class Question {
     }
 
 
-    /*  setAnswers will accept a list of Clue objects and generate a list of of answers for the question. This way, a question
+    /*  setAnswerMultipleChoice will accept a list of Clue objects and generate a list of of answers for the question. This way, a question
         will have multiple choices to display for the user to choose from. The correct answer is stored in
         this.getCLUE().getAnswer().
         The list that is passed in should be a list of Clues in the same category. If the list contains clues from a different
         category the false answers will be too obvious.
         If the List is too small (ie, the category does not have many clues in it), duplicate answers are likely to occur.*/
-    public void setAnswers(ArrayList<Clue> cluesList) {
+    public void setAnswerMultipleChoice(ArrayList<Clue> cluesList) {
         ANSWER_STRING_ARRAY_LIST.add(this.CLUE.getAnswer());
         Random random = new Random();
 
@@ -49,12 +49,12 @@ public class Question {
         return answeredCorrectly;
     }
 
-    public void setAnsweredCorrectly(String answerChoice) {
-        setAnsweredCorrectly(answerChoice.equalsIgnoreCase(this.CLUE.getAnswer()));
-    }
-
     private void setAnsweredCorrectly(boolean answeredCorrectly) {
         this.answeredCorrectly = answeredCorrectly;
+    }
+
+    public void setAnsweredCorrectly(String answerChoice) {
+        setAnsweredCorrectly(answerChoice.equalsIgnoreCase(this.CLUE.getAnswer()));
     }
 
     public String getAnswerFromMultipleChoice(int i) {

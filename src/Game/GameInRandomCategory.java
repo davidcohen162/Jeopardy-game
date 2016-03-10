@@ -15,24 +15,23 @@ import java.util.Random;
 public class GameInRandomCategory extends Game {
     private Random rand = new Random();
 
-    public GameInRandomCategory(int amountOfQuestions, int amountOfCluesInCategory) throws IOException {
-        super(amountOfQuestions, amountOfCluesInCategory);
+    public GameInRandomCategory(int amountOfQuestions) throws IOException {
+        super(amountOfQuestions);
 //        setUpQuestions();
     }
 
     public void setUpQuestions() throws IOException {
         CategoryJson json = new CategoryJson();
-        List<Question> questionList = new ArrayList<>(getAmountOfQuestions());
+        List<Question> questionList = new ArrayList<>(getAmountOfQuestionsInGame());
         Clue c;
         Category category = json.getCategory(getValidCategories(1).get(0).getId());
 
-        for (int i = 0; i < getAmountOfQuestions(); i++) {
+        for (int i = 0; i < getAmountOfQuestionsInGame(); i++) {
             c = category.getClues().get(rand.nextInt(category.getClues().size()));
             questionList.add(new Question((c), (ArrayList<Clue>) category.getClues()));
             category.getClues().remove(c);
         }
-
-        setGameQuestions(new GameQuestions(questionList));
+        setQuestionsList(questionList);
     }
 
     public ArrayList<Category> getValidCategories(int amountOfCategoriesToGet) throws IOException {
@@ -53,7 +52,6 @@ public class GameInRandomCategory extends Game {
                 i++;
             }
         }
-
         return catArrayListWithEnoughQuestions;
     }
 
