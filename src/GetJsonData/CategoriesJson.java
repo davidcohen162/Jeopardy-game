@@ -67,12 +67,13 @@ public class CategoriesJson extends GetJSONData {
     public ArrayList<Category> getArrayListOfCatsWithMoreThan_n_Clues(int amountOfCatsToGet, int amountOfClues) throws IOException {
         ArrayList<Category> cats = new ArrayList<>(amountOfCatsToGet);
 
-//        Main loop will continue as long as we dont have the amount of categories that was requested.
+//        Main loop will continue as long as we don't have the amount of categories that was requested.
         int amountOfCatsWeGot = 0;
         while (amountOfCatsWeGot < amountOfCatsToGet) {
             Category[] randomCategories = getArrayOfRandomCats(25);
 
-/*          This loop iterates through the array the latest request we made for Categories.
+/*          This loop iterates through the array of the latest request we made for Categories, and checks each one to if it has
+            more than amountOfClues. If it does it gets added to the ArrayList.
             The loop will end when we get to the end of the array. It will then restart the main loop, which checks
             if we have enough Categories. The loop can also end if while iterating through the current batch of Categories
             we find that we have enough categories.
