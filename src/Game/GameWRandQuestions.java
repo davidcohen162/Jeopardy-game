@@ -7,7 +7,6 @@ import Questions.RandomQuestion;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GameWRandQuestions extends Game {
 
@@ -18,21 +17,11 @@ public class GameWRandQuestions extends Game {
     }
 
     public void setUpQuestions() throws IOException {
-        List<Question> questionList = new ArrayList<>();
-        RandomQuestionsJson randomQuestionsJson = new RandomQuestionsJson();
-
-        int i = 0;
-        while (i < getAmountOfQuestionsInGame()) {
-            Clue[] clues = randomQuestionsJson.getManyRandomClueObjects(10);
-
-            int j = 0;
-            while (j < clues.length && i < getAmountOfQuestionsInGame()) {
-                if (clues[j].getCategory().getCluesCount() >= getMinAmountOfCluesInCategory()) {
-                    questionList.add(new RandomQuestion(clues[j]));
-                    i++;
-                }
-                j++;
-            }
+        ArrayList<Question> questionList = new ArrayList<>();
+        RandomQuestionsJson json = new RandomQuestionsJson();
+        ArrayList<Clue> clues = json.getRandCluesWithMoreThan_n_CluesInCat(getAmountOfQuestionsInGame(), getMinAmountOfCluesInCategory());
+        for (Clue c : clues) {
+            questionList.add(new RandomQuestion(c));
         }
         setQuestionsList(questionList);
     }

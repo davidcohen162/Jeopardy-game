@@ -16,5 +16,4 @@ public class RandomQuestion extends Question {
         setAnswerMultipleChoice((ArrayList<Clue>) categoryJson.getCategory(getCLUE().getCategoryId()).getClues());
     }
 
-
 }

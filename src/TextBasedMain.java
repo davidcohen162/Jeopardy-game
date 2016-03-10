@@ -25,6 +25,12 @@ public class TextBasedMain {
             }
             input = keyboard.nextLine();
             gameInRandomCategory.setPlayersAnswer(i, gameInRandomCategory.getQuestion(i).getAnswerFromMultipleChoice(Integer.parseInt(input) - 1));
+
+            if (gameInRandomCategory.aQuestionWasAnsweredCorrectly(i)) {
+                System.out.println("Excelsior!");
+            } else {
+                System.out.println("Drink Coke, play again :; ");
+            }
         }
     }
 
