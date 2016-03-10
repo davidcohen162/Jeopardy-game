@@ -37,14 +37,12 @@ public class GameInRandomCategory extends Game {
 
     public ArrayList<Category> getValidCategories(int amountOfCategoriesToGet) throws IOException {
         CategoriesJson catJson = new CategoriesJson();
-        Category[] notValidatedCategories;
         ArrayList<Category> catArrayListWithEnoughQuestions = new ArrayList<>(amountOfCategoriesToGet);
         int amountOfCategoriesInOneRequest = 25;
 
-        int j = 0, offset;
+        int j = 0;
         while (j < amountOfCategoriesToGet) {
-            offset = rand.nextInt(CategoriesJson.MAX_OFFSET - amountOfCategoriesInOneRequest);
-            notValidatedCategories = catJson.getArrayOfCategories(amountOfCategoriesInOneRequest, offset);
+            Category[] notValidatedCategories = catJson.getArrayOfRandomCategories(amountOfCategoriesInOneRequest);
 
             int i = 0;
             while (i < notValidatedCategories.length && j < amountOfCategoriesToGet) {

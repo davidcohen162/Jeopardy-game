@@ -4,6 +4,7 @@ package GetJsonData;
 import Questions.Category;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class CategoriesJson extends GetJSONData {
 
@@ -56,5 +57,11 @@ public class CategoriesJson extends GetJSONData {
         requestCategoriesJsonFromWeb(count, offSet);
         Category[] categories = gson.fromJson(getLastJsonResponse(), Category[].class);
         return categories;
+    }
+
+    private Random rand = new Random();
+
+    public Category[] getArrayOfRandomCategories(int amountOfCategoriesToGet) throws IOException {
+        return getArrayOfCategories(amountOfCategoriesToGet, rand.nextInt(MAX_OFFSET - amountOfCategoriesToGet));
     }
 }
