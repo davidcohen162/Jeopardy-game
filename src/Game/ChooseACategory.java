@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class ChooseACategory extends Game {
 
     private final ArrayList<Category> catsToChooseFrom;
+    private Category categoryChosen;
 
     public ChooseACategory(int amountOfQuestions) throws IOException {
         super(amountOfQuestions);
@@ -24,8 +25,12 @@ public class ChooseACategory extends Game {
 
     public void setTheCategory(int index) throws IOException {
         CategoryJson catJson = new CategoryJson();
-        Category cat = catJson.getCategory(catsToChooseFrom.get(index).getId());
-
-        setUpQuestions(cat.getClues());
+        categoryChosen = catJson.getCategory(catsToChooseFrom.get(index).getId());
+        setUpQuestions();
     }
+
+    private void setUpQuestions() {
+        super.setUpQuestions(categoryChosen.getClues());
+    }
+
 }
