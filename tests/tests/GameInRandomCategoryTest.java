@@ -18,7 +18,7 @@ public class GameInRandomCategoryTest {
 
     @Before
     public void setUp() throws Exception {
-        randomCategory = new GameInRandomCategory(10, 30);
+        randomCategory = new GameInRandomCategory(10);
     }
 
     @Test
@@ -33,7 +33,7 @@ public class GameInRandomCategoryTest {
     public void testGetValidCategories() throws Exception {
         ArrayList<Category> categoryList = randomCategory.getValidCategories(1);
         for (Category c : categoryList) {
-            assertTrue(c.getCluesCount() >= 10);
+            assertTrue(c.getCluesCount() >= randomCategory.getMinAmountOfCluesInCategory());
             assertNotNull(c);
         }
     }

@@ -45,16 +45,20 @@ public class Question {
         return CLUE;
     }
 
+    public String getCorrectAnswer() {
+        return getCLUE().getAnswer();
+    }
+
     public boolean isAnsweredCorrectly() {
         return answeredCorrectly;
     }
 
-    private void setAnsweredCorrectly(boolean answeredCorrectly) {
-        this.answeredCorrectly = answeredCorrectly;
+    public void setAnsweredCorrectly(String answerChoice) {
+        setAnsweredCorrectly(answerChoice.equalsIgnoreCase(this.getCorrectAnswer()));
     }
 
-    public void setAnsweredCorrectly(String answerChoice) {
-        setAnsweredCorrectly(answerChoice.equalsIgnoreCase(this.CLUE.getAnswer()));
+    private void setAnsweredCorrectly(boolean answeredCorrectly) {
+        this.answeredCorrectly = answeredCorrectly;
     }
 
     public String getAnswerFromMultipleChoice(int i) {

@@ -6,16 +6,20 @@ import java.util.List;
 
 public class Game {
     private final int amountOfQuestionsInGame;
-    private final int amountOfCluesInCategory;  // will control the minimum amount of clues a cateogry has; too little means that the multiple choices might have duplicate answers.
+    private final int minAmountOfCluesInCategory;  // will control the minimum amount of clues a cateogry has; too little means that the multiple choices might have duplicate answers.
     private List<Question> questionsList;
     private int MAX_SCORE;
 
 
     public Game(int amountOfQuestions) {
         this.amountOfQuestionsInGame = amountOfQuestions;
-        this.amountOfCluesInCategory = amountOfQuestions * 4;
+        this.minAmountOfCluesInCategory = amountOfQuestions * 4;
     }
 
+    public Game(int amountOfQuestions, int amountOfCluesInCategory) {
+        this.amountOfQuestionsInGame = amountOfQuestions;
+        this.minAmountOfCluesInCategory = amountOfCluesInCategory;
+    }
     public List<Question> getQuestionsList() {
         return questionsList;
     }
@@ -47,8 +51,8 @@ public class Game {
         return amountOfQuestionsInGame;
     }
 
-    public int getAmountOfCluesInCategory() {
-        return amountOfCluesInCategory;
+    public int getMinAmountOfCluesInCategory() {
+        return minAmountOfCluesInCategory;
     }
 
 

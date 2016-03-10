@@ -9,7 +9,7 @@ public class TextBasedMain {
         int questionsToAsk = 10;
         Scanner keyboard = new Scanner(System.in);
         String input;
-        GameInRandomCategory gameInRandomCategory = new GameInRandomCategory(questionsToAsk, 40);
+        GameInRandomCategory gameInRandomCategory = new GameInRandomCategory(questionsToAsk);
         gameInRandomCategory.setUpQuestions();
 
         for (int i = 0; i < questionsToAsk; i++) {

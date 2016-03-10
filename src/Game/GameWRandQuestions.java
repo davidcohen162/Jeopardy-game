@@ -14,7 +14,7 @@ public class GameWRandQuestions extends Game {
 
     public GameWRandQuestions(int amountOfQuestions, int amountOfCluesInCategory) throws IOException {
         super(amountOfQuestions, amountOfCluesInCategory);
-        setUpQuestions();
+//        setUpQuestions();
     }
 
     public void setUpQuestions() throws IOException {
@@ -28,7 +28,7 @@ public class GameWRandQuestions extends Game {
 
             int j = 0;
             while (j < clues.length && i < getAmountOfQuestionsInGame()) {
-                if (clues[j].getCategory().getCluesCount() >= getAmountOfCluesInCategory()) {
+                if (clues[j].getCategory().getCluesCount() >= getMinAmountOfCluesInCategory()) {
                     questionList.add(new RandomQuestion(clues[j]));
                     i++;
                 }
