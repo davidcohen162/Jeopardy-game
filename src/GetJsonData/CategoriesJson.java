@@ -4,6 +4,7 @@ package GetJsonData;
 import Questions.Category;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class CategoriesJson extends GetJSONData {
@@ -16,7 +17,7 @@ public class CategoriesJson extends GetJSONData {
     //    By default the request will always return the same categories starting from x. Setting the Offset will return
 //    categories starting from the offset number.
     private static final String offsetQuery = "offset";
-
+    private Random rand = new Random();
 
     public CategoriesJson() {
         super("http://jservice.io/api/categories");
@@ -59,9 +60,27 @@ public class CategoriesJson extends GetJSONData {
         return categories;
     }
 
-    private Random rand = new Random();
-
-    public Category[] getArrayOfRandomCategories(int amountOfCategoriesToGet) throws IOException {
+    public Category[] getArrayOfRandomCats(int amountOfCategoriesToGet) throws IOException {
         return getArrayOfCategories(amountOfCategoriesToGet, rand.nextInt(MAX_OFFSET - amountOfCategoriesToGet));
     }
+
+    public ArrayList<Category> getArrayListOfCatsWithMoreThan_n_Clues(int amountOfCatsToGet, int amountOfClues) throws IOException {
+        ArrayList<Category> cats = new ArrayList<>(amountOfCatsToGet);
+
+        int j = 0;
+        while (j < amountOfCatsToGet) {
+            Category[] randomCategories = getArrayOfRandomCats(25);
+
+            int i = 0;
+            while (i < randomCategories.length && j < amountOfCatsToGet) {
+                if (randomCategories[i].getCluesCount() >= amountOfClues) {
+                    cats.add(randomCategories[i]);
+                    j++;
+                }
+                i++;
+            }
+        }
+        return cats;
+    }
+
 }

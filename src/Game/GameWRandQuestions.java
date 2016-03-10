@@ -20,11 +20,10 @@ public class GameWRandQuestions extends Game {
     public void setUpQuestions() throws IOException {
         List<Question> questionList = new ArrayList<>();
         RandomQuestionsJson randomQuestionsJson = new RandomQuestionsJson();
-        Clue[] clues;
 
         int i = 0;
         while (i < getAmountOfQuestionsInGame()) {
-            clues = randomQuestionsJson.getManyRandomClueObjects(10);
+            Clue[] clues = randomQuestionsJson.getManyRandomClueObjects(10);
 
             int j = 0;
             while (j < clues.length && i < getAmountOfQuestionsInGame()) {

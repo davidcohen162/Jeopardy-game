@@ -27,4 +27,10 @@ public class CategoryJson extends GetJSONData{
         Category category = gson.fromJson(getLastJsonResponse(), Category.class);
         return category;
     }
+
+    public Category getRandomCatWith_n_Clues(int amountOfClues) throws IOException {
+        CategoriesJson categoriesJson = new CategoriesJson();
+
+        return categoriesJson.getArrayListOfCatsWithMoreThan_n_Clues(1, amountOfClues).get(0);
+    }
 }

@@ -1,8 +1,11 @@
 package Game;
 
+import Questions.Clue;
 import Questions.Question;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Game {
     private final int amountOfQuestionsInGame;
@@ -34,6 +37,17 @@ public class Game {
         this.MAX_SCORE = scoreAccum;
     }
 
+    protected void setUpQuestions(List<Clue> clues) {
+        List<Question> questionList = new ArrayList<>(getAmountOfQuestionsInGame());
+        Random rand = new Random();
+
+        for (int i = 0; i < getAmountOfQuestionsInGame(); i++) {
+            Clue c = clues.get(rand.nextInt(clues.size()));
+            questionList.add(new Question((c), (ArrayList<Clue>) clues));
+            clues.remove(c);
+        }
+        setQuestionsList(questionList);
+    }
     public Question getQuestion(int index) {
         return questionsList.get(index);
     }

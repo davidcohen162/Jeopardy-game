@@ -24,7 +24,7 @@ public class TextBasedMain {
                         + gameInRandomCategory.getQuestion(i).getAnswerFromMultipleChoice(j));
             }
             input = keyboard.nextLine();
-            gameInRandomCategory.getQuestion(i).setAnsweredCorrectly(gameInRandomCategory.getQuestion(i).getAnswerFromMultipleChoice(Integer.parseInt(input) - 1));
+            gameInRandomCategory.setPlayersAnswer(i, gameInRandomCategory.getQuestion(i).getAnswerFromMultipleChoice(Integer.parseInt(input) - 1));
         }
     }
 
