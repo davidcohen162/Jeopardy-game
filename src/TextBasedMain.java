@@ -17,14 +17,14 @@ public class TextBasedMain {
                     "\t\tScore: " + gameInRandomCategory.getScore()
                     + " out of: " + gameInRandomCategory.getMaxScore());
 
-            System.out.println(gameInRandomCategory.getQuestion(i).getCLUE().getQuestion());
+            System.out.println(gameInRandomCategory.getQuestionString(i));
 
-            for (int j = 0; j < gameInRandomCategory.getQuestion(i).INCORRECT_ANSWER_CHOICES + 1; j++) {
+            for (int j = 0; j < gameInRandomCategory.getMultipleChoiceAnswers(i).size(); j++) {
                 System.out.println(j + 1 + ". "
-                        + gameInRandomCategory.getQuestion(i).getAnswerFromMultipleChoice(j));
+                        + gameInRandomCategory.getMultipleChoiceAnswers(i).get(j));
             }
             input = keyboard.nextLine();
-            gameInRandomCategory.setPlayersAnswer(i, gameInRandomCategory.getQuestion(i).getAnswerFromMultipleChoice(Integer.parseInt(input) - 1));
+            gameInRandomCategory.setPlayersAnswer(i, gameInRandomCategory.getMultipleChoiceAnswers(i).get(Integer.parseInt(input) - 1));
 
             if (gameInRandomCategory.aQuestionWasAnsweredCorrectly(i)) {
                 System.out.println("Excelsior!");
