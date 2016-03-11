@@ -23,6 +23,8 @@ public class Game {
         this.amountOfQuestionsInGame = amountOfQuestions;
         this.minAmountOfCluesInCategory = amountOfCluesInCategory;
     }
+
+    //    Only public for testing.
     public List<Question> getQuestionsList() {
         return questionsList;
     }
@@ -49,6 +51,7 @@ public class Game {
         setQuestionsList(questionList);
     }
 
+
     public String getQuestionString(int index) {
         return questionsList.get(index).getCLUE().getQuestion();
     }
@@ -60,6 +63,11 @@ public class Game {
     public ArrayList<String> getMultipleChoiceAnswers(int index) {
         return questionsList.get(index).getANSWER_STRING_ARRAY_LIST();
     }
+
+    public String getAQuestionsCategory(int index) {
+        return questionsList.get(index).getCLUE().getCategory().getTitle();
+    }
+
     //
     public void setPlayersAnswer(int index, String playerChoice) {
         getQuestion(index).setAnsweredCorrectly(playerChoice);
@@ -68,6 +76,7 @@ public class Game {
     public boolean aQuestionWasAnsweredCorrectly(int index) {
         return getQuestion(index).isAnsweredCorrectly();
     }
+
 
     public int getAmountOfQuestionsInGame() {
         return amountOfQuestionsInGame;
