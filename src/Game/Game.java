@@ -48,10 +48,14 @@ public class Game {
         }
         setQuestionsList(questionList);
     }
-    public Question getQuestion(int index) {
-        return questionsList.get(index);
+
+    public String getQuestionString(int index) {
+        return questionsList.get(index).getCLUE().getQuestion();
     }
 
+    protected Question getQuestion(int index) {
+        return questionsList.get(index);
+    }
     //
     public void setPlayersAnswer(int index, String playerChoice) {
         getQuestion(index).setAnsweredCorrectly(playerChoice);
