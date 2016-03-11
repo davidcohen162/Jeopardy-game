@@ -53,12 +53,16 @@ public class Question {
         return answeredCorrectly;
     }
 
+    private void setAnsweredCorrectly(boolean answeredCorrectly) {
+        this.answeredCorrectly = answeredCorrectly;
+    }
+
     public void setAnsweredCorrectly(String answerChoice) {
         setAnsweredCorrectly(answerChoice.equalsIgnoreCase(this.getCorrectAnswer()));
     }
 
-    private void setAnsweredCorrectly(boolean answeredCorrectly) {
-        this.answeredCorrectly = answeredCorrectly;
+    public ArrayList<String> getANSWER_STRING_ARRAY_LIST() {
+        return ANSWER_STRING_ARRAY_LIST;
     }
 
     public String getAnswerFromMultipleChoice(int i) {
