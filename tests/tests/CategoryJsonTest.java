@@ -8,8 +8,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 
 public class CategoryJsonTest {
@@ -41,5 +40,12 @@ public class CategoryJsonTest {
             assertNotNull(c);
             assertNotNull(c.getQuestion());
         }
+    }
+
+    @Test
+    public void testGetRandomCatWith_n_Clues() throws IOException {
+        Category category = catJson.getRandomCatWith_n_Clues(20);
+        assertTrue(category.getCluesCount() >= 20);
+        assertTrue(category.getClues().size() >= 20);
     }
 }
