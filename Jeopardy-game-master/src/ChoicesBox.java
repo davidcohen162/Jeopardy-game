@@ -25,7 +25,6 @@ public class ChoicesBox  {
 		GameInRandomCategory gameInRandomCategory = new GameInRandomCategory(questionsToAsk);
         gameInRandomCategory.setUpQuestions();
 		ComboBox<String> cbox=new ComboBox<String>();//Setting the combo box
-		cbox.setValue(cbox.getValue());;//Setting the visible limit to 4
 		for(int i=0;i<questionsToAsk;i++){//Setting the question text
 			qlbl.setText("Question: " + (i + 1) + " out of: " + gameInRandomCategory.getAmountOfQuestionsInGame() +":"+gameInRandomCategory.getQuestionString(i)+
                     "\t\tScore: " + gameInRandomCategory.getScore()
