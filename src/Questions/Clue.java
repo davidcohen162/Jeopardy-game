@@ -1,11 +1,9 @@
 package Questions;
 
-import javax.annotation.Generated;
-
-import Questions.Category;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import javax.annotation.Generated;
 import java.util.Date;
 
 @Generated("org.jsonschema2pojo")
@@ -259,5 +257,43 @@ public class Clue {
         sb.append(", category=").append(category);
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Clue clue = (Clue) o;
+
+        if (id != clue.id) return false;
+        if (value != clue.value) return false;
+        if (categoryId != clue.categoryId) return false;
+        if (!answer.equals(clue.answer)) return false;
+        if (!question.equals(clue.question)) return false;
+        if (airdate != null ? !airdate.equals(clue.airdate) : clue.airdate != null) return false;
+        if (createdAt != null ? !createdAt.equals(clue.createdAt) : clue.createdAt != null) return false;
+        if (updatedAt != null ? !updatedAt.equals(clue.updatedAt) : clue.updatedAt != null) return false;
+        if (gameId != null ? !gameId.equals(clue.gameId) : clue.gameId != null) return false;
+        if (invalidCount != null ? !invalidCount.equals(clue.invalidCount) : clue.invalidCount != null) return false;
+        if (!category.equals(clue.category)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + answer.hashCode();
+        result = 31 * result + question.hashCode();
+        result = 31 * result + value;
+        result = 31 * result + (airdate != null ? airdate.hashCode() : 0);
+        result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
+        result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
+        result = 31 * result + categoryId;
+        result = 31 * result + (gameId != null ? gameId.hashCode() : 0);
+        result = 31 * result + (invalidCount != null ? invalidCount.hashCode() : 0);
+        result = 31 * result + category.hashCode();
+        return result;
     }
 }

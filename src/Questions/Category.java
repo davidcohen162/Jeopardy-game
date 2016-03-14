@@ -1,9 +1,9 @@
 package Questions;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import javax.annotation.Generated;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +12,7 @@ import java.util.Random;
 @Generated("org.jsonschema2pojo")
 public class Category {
 
+    Random rand = new Random();
     @SerializedName("id")
     @Expose
     private int id;
@@ -30,7 +31,6 @@ public class Category {
     @SerializedName("clues")
     @Expose
     private List<Clue> clues = new ArrayList<Clue>();
-
 
     /**
      *
@@ -131,18 +131,47 @@ public class Category {
         return clues;
     }
 
-    Random rand = new Random();
+    /**
+     * @param clues The clues
+     */
+    public void setClues(List<Clue> clues) {
+        this.clues = clues;
+    }
+
     public Clue getRandomClue() {
         Clue cl = clues.get(rand.nextInt(clues.size()));
         clues.remove(cl);
         return cl;
     }
-    /**
-     *
-     * @param clues
-     * The clues
-     */
-    public void setClues(List<Clue> clues) {
-        this.clues = clues;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Category category = (Category) o;
+
+        if (id != category.id) return false;
+        if (cluesCount != category.cluesCount) return false;
+        if (!title.equals(category.title)) return false;
+        if (!createdAt.equals(category.createdAt)) return false;
+        if (!updatedAt.equals(category.updatedAt)) return false;
+        if (clues != null ? !clues.equals(category.clues) : category.clues != null) return false;
+        if (rand != null ? !rand.equals(category.rand) : category.rand != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + title.hashCode();
+        result = 31 * result + createdAt.hashCode();
+        result = 31 * result + updatedAt.hashCode();
+        result = 31 * result + cluesCount;
+        result = 31 * result + (clues != null ? clues.hashCode() : 0);
+        result = 31 * result + (rand != null ? rand.hashCode() : 0);
+        return result;
     }
 }
+
