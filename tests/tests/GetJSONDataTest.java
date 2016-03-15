@@ -22,7 +22,7 @@ public class GetJSONDataTest {
 
     @BeforeClass
     public static void setJsonForCategory5() throws FileNotFoundException {
-        java.io.File file = new java.io.File("D:\\My Documents\\Code\\IDEA Projects\\Jeopardy\\Jeopardy-game\\jsonToTestAgainst.json");
+        java.io.File file = new java.io.File("jsonToTestAgainst.json");
         Scanner input = new Scanner(file);
 
         if (!input.hasNext()) {
