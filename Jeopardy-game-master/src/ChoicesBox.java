@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 public class ChoicesBox  {  
@@ -35,7 +36,7 @@ public class ChoicesBox  {
 		btnOK.setMinWidth(75);        
 		btnOK.setOnAction(e -> //Setting the OK button to continue the game
 				stage.close());
-		 Button btnStop=new Button("Stop");//Adding a stop button
+		 Button btnStop=new Button("Quit Game");//Adding a stop button
 		 btnStop.setMinWidth(75);
 		 btnStop.setOnAction(new EventHandler<ActionEvent>() {//Assigning actions to stop button
 			    public void handle(ActionEvent e) {
@@ -45,52 +46,55 @@ public class ChoicesBox  {
 			    }
 			});
 
-		for(int i=0;i<questionsToAsk;i++){//Setting the question text
+		for(int i=0;i<questionsToAsk;i++){//Setting the question text and font
+			qlbl.setFont(Font.font("Verdana",14));
 			qlbl.setText("Question: " + (i + 1) + " out of: " + gameInRandomCategory.getAmountOfQuestionsInGame() +":"+gameInRandomCategory.getQuestionString(i)
                    );
+			//Setting the score text and font
+			slbl.setFont(Font.font("Verdana", 14));
 			slbl.setText( "\t\tScore: " + gameInRandomCategory.getScore()
                     + " out of: " + gameInRandomCategory.getMaxScore());
 			cbox.setPromptText(gameInRandomCategory.getMultipleChoiceAnswers(i).get(0));
 
-            
+			cbox.getItems().clear(); //Clearing the combo box array
 		 		for (int j = 0; j < gameInRandomCategory.getMultipleChoiceAnswers(i).size(); j++) {
 		 			
 			 		cbox.getItems().add(gameInRandomCategory.getMultipleChoiceAnswers(i).get(j));//Adding clues to combobox
 		
 		 		}
 		 		
-		 		String input=cbox.getValue();
-		 		int choiceIndex=0;
-		 		for(int h=0;h<gameInRandomCategory.getMultipleChoiceAnswers(i).size();h++){
-		 			if((gameInRandomCategory.getMultipleChoiceAnswers(i).get(h).equals(input))){
-		 				choiceIndex=h;
-		 				break;
+		 		
+		 		for(int h=0;h<cbox.getItems().size();h++){
+		 			if((cbox.getItems().get(h).equals(cbox.getValue()))){
+		 				int choiceIndex=h;
+				 		gameInRandomCategory.setPlayersAnswer(i, gameInRandomCategory.getMultipleChoiceAnswers(i).get(choiceIndex));
+				 		
 		 			}
 		 		}
-		 		gameInRandomCategory.setPlayersAnswer(i, gameInRandomCategory.getMultipleChoiceAnswers(i).get(choiceIndex));
 		 		
 		 		
 		    GridPane pane = new GridPane();  //Pane to place the cbox in 
 		    pane.setVgap(10);
 	        pane.setHgap(10);
 	        pane.add(qlbl, 0, 1);//Question text and score
+	        
 	        pane.add(slbl, 1, 1);
 	        pane.add(cbox,0,2); //Adding combobox to pane
-	        pane.add(btnOK,1, 2);//Adding the OK button
-	        pane.add(btnStop, 2, 2);
+	        pane.add(btnOK,1,2);//Adding the OK button
+	        pane.add(btnStop, 2,2);
 			pane.setAlignment(Pos.CENTER); //Setting combobox in center
-			pane.setPadding(new Insets(10,10,10,10));
+			pane.setPadding(new Insets(10,10,10,10));//Setting window chrome around contents
 		    Scene scene = new Scene(pane);     //Adding pane to scene    
-			stage.setScene(scene);       //Adding scene to stage 	
+			stage.setScene(scene);       //Adding scene to stage 
+			
 			stage.showAndWait();//Showing in window
 			
 			if (gameInRandomCategory.aQuestionWasAnsweredCorrectly(i)) {
-	 			
-                MessageBox.show("Excelsior!", ""+(i+1)+" out of " + gameInRandomCategory.getAmountOfQuestionsInGame());
+	 			MessageBox.show("Excelsior!", ""+(i+1)+" out of " + gameInRandomCategory.getAmountOfQuestionsInGame());
             } else {
             	MessageBox.show("Drink Coke, play again :; ", ""+(i+1)+" out of " + gameInRandomCategory.getAmountOfQuestionsInGame());
             }
-			cbox.getItems().clear(); } //Clearing the combo box array
+			} 
 	
 
 

@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 public class Main extends Application {    
 			
@@ -19,9 +20,10 @@ public class Main extends Application {
 		@Override public void start(Stage primaryStage) throws IOException    {
 			
 		// Create the button       
-		btn = new Button();        
+		btn = new Button(); 
+		btn.setFont(Font.font(20));
 		btn.setText("Start!");        
-		btn.setOnAction(e -> buttonClick());//Litening for a click on the start
+		btn.setOnAction(e -> buttonClick());//Listening for a click on the start
         	// Add the labels and button to a layout pane        
 		BorderPane pane = new BorderPane();
 		
