@@ -40,7 +40,7 @@ public class Main extends Application {
 
 	public void buttonClick() {
 
-		if (btn.getText() == "Start!") {
+		if (btn.getText().equals("Start!")) {
 			//Showing the combo box
 			try {
 				ChoicesBox.show("Choose an answer", "Choices");
