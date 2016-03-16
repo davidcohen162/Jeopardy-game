@@ -69,6 +69,10 @@ public class ChoicesBox  {
 						String selected=cbox.getValue();
 						
 					 		gameInRandomCategory.setPlayersAnswer(question, selected);
+					 		if(question==9){
+					 		MessageBox.show("Final score is: " + "\t\tScore: " + gameInRandomCategory.getScore()
+		                    + " out of: " + gameInRandomCategory.getMaxScore(),"Final Score");
+					 		}
 					 		stage.close();
 				 		}
 					
