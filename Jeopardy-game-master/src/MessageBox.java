@@ -5,7 +5,8 @@
 import javafx.application.*; 
 import javafx.stage.*; 
 import javafx.scene.*; 
-import javafx.scene.layout.*; 
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
 import javafx.scene.control.*; 
 import javafx.geometry.*;
 public class MessageBox  {    
@@ -14,7 +15,8 @@ public class MessageBox  {
 		stage.initModality(Modality.APPLICATION_MODAL);         
 		stage.setTitle(title);        
 		stage.setMinWidth(250);
-        Label lbl = new Label();         
+        Label lbl = new Label();
+        lbl.setFont(Font.font("Verdana",14));
         lbl.setText(message);
         Button btnOK = new Button();         
         btnOK.setText("OK");        
