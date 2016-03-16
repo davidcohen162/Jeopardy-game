@@ -1,14 +1,11 @@
-
-
-	
-
-import javafx.application.*; 
-import javafx.stage.*; 
-import javafx.scene.*; 
-import javafx.scene.layout.*;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.control.*; 
-import javafx.geometry.*;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 public class MessageBox  {    
 	public static void show(String message, String title)     {        
 		Stage stage = new Stage();        
@@ -16,7 +13,7 @@ public class MessageBox  {
 		stage.setTitle(title);        
 		stage.setMinWidth(250);
         Label lbl = new Label();
-        lbl.setFont(Font.font("Verdana",14));
+        lbl.setFont(Font.font("Verdana", 14));
         lbl.setText(message);
         Button btnOK = new Button();         
         btnOK.setText("OK");        
@@ -25,5 +22,7 @@ public class MessageBox  {
         pane.getChildren().addAll(lbl, btnOK);        
         pane.setAlignment(Pos.CENTER); 
         Scene scene = new Scene(pane);        
-        stage.setScene(scene);        
-        stage.showAndWait();     } }
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
+}
