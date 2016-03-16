@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,42 +17,42 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-			
-		// Create the button       
+
+		// Create the button
 		btn = new Button();
+		btn.setFont(Font.font(20));
 		btn.setText("Start!");
-		btn.setOnAction(e -> buttonClick());//Litening for a click on the start
+		btn.setOnAction(e -> buttonClick());//Listening for a click on the start
 		// Add the labels and button to a layout pane
 		BorderPane pane = new BorderPane();
 
 
 		pane.setCenter(btn);
 
-		// Add the layout pane to a scene        
+		// Add the layout pane to a scene
 		Scene scene2 = new Scene(pane);//The numbers set the size
 		// Finalize and show the stage
 		primaryStage.setMinWidth(650);
-		primaryStage.setScene(scene2);        
-		primaryStage.setTitle("The Jeopardy game");        
-		primaryStage.show();   
-}        //The clicking method to lead to the choice combo box, runs in a loop
-		public void buttonClick()    {
+		primaryStage.setScene(scene2);
+		primaryStage.setTitle("The Jeopardy game");
+		primaryStage.show();
+	}        //The clicking method to lead to the choice combo box, runs in a loop
 
-			if (btn.getText() == "Start!") {
-				//Showing the combo box
-				try {
-					ChoicesBox.show("Choose an answer", "Choices");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+	public void buttonClick() {
 
-				}
+		if (btn.getText() == "Start!") {
+			//Showing the combo box
+			try {
+				ChoicesBox.show("Choose an answer", "Choices");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+
 			}
-				else  {
-				btn.setText("Start!");
-					}
-
+		} else {
+			btn.setText("Start!");
 		}
-		}        
-		
+
+	}
+}
 
