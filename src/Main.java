@@ -18,7 +18,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
-		// Create the button
+		// Create the button       
 		btn = new Button();
 		btn.setFont(Font.font(20));
 		btn.setText("Start!");
@@ -29,7 +29,7 @@ public class Main extends Application {
 
 		pane.setCenter(btn);
 
-		// Add the layout pane to a scene
+		// Add the layout pane to a scene        
 		Scene scene2 = new Scene(pane);//The numbers set the size
 		// Finalize and show the stage
 		primaryStage.setMinWidth(650);
@@ -40,7 +40,7 @@ public class Main extends Application {
 
 	public void buttonClick() {
 
-		if (btn.getText().equals("Start!")) {
+		if (btn.getText() == "Start!") {
 			//Showing the combo box
 			try {
 				ChoicesBox.show("Choose an answer", "Choices");
@@ -49,10 +49,11 @@ public class Main extends Application {
 				e.printStackTrace();
 
 			}
-		} else {
+			} else {
 			btn.setText("Start!");
 		}
 
 	}
 }
+		
 
