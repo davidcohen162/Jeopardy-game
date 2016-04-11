@@ -12,7 +12,7 @@ import java.util.Random;
 @Generated("org.jsonschema2pojo")
 public class Category {
 
-    Random rand = new Random();
+    private Random rand = new Random();
     @SerializedName("id")
     @Expose
     private int id;

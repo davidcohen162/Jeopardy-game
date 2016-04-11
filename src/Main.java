@@ -6,8 +6,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-public class Main extends Application {
 
+public class Main extends Application {
+			
 	Button btn;//The center select button
 
 
@@ -17,30 +18,30 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-
+			
 		// Create the button       
-		btn = new Button();
+		btn = new Button(); 
 		btn.setFont(Font.font(20));
-		btn.setText("Start!");
+		btn.setText("Start!");        
 		btn.setOnAction(e -> buttonClick());//Listening for a click on the start
 		// Add the labels and button to a layout pane
 		BorderPane pane = new BorderPane();
 
 
-		pane.setCenter(btn);
-
+		pane.setCenter(btn);  
+		
 		// Add the layout pane to a scene        
 		Scene scene2 = new Scene(pane);//The numbers set the size
 		// Finalize and show the stage
 		primaryStage.setMinWidth(650);
-		primaryStage.setScene(scene2);
-		primaryStage.setTitle("The Jeopardy game");
-		primaryStage.show();
-	}        //The clicking method to lead to the choice combo box, runs in a loop
+		primaryStage.setScene(scene2);        
+		primaryStage.setTitle("The Jeopardy game");        
+		primaryStage.show();   
+}        //The clicking method to lead to the choice combo box, runs in a loop
 
 	public void buttonClick() {
 
-		if (btn.getText() == "Start!") {
+		if (btn.getText().equals("Start!")) {
 			//Showing the combo box
 			try {
 				ChoicesBox.show("Choose an answer", "Choices");
@@ -49,11 +50,11 @@ public class Main extends Application {
 				e.printStackTrace();
 
 			}
-			} else {
+		} else {
 			btn.setText("Start!");
-		}
+					}
 
 	}
-}
+		}        
 		
 

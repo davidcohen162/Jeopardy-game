@@ -1,7 +1,7 @@
 package Game;
 
-import GetJsonData.CategoriesJson;
-import GetJsonData.CategoryJson;
+import GetJsonData.CategoriesRepository;
+import GetJsonData.CategoryRepository;
 import Questions.Category;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class ChooseACategory extends Game {
 
     public ChooseACategory(int amountOfQuestions) throws IOException {
         super(amountOfQuestions);
-        CategoriesJson catsJson = new CategoriesJson();
+        CategoriesRepository catsJson = new CategoriesRepository();
         catsToChooseFrom = catsJson.getArrayListOfCatsWithMoreThan_n_Clues(25, getMinAmountOfCluesInCategory());
     }
 
@@ -24,8 +24,8 @@ public class ChooseACategory extends Game {
     }
 
     public void setTheCategory(int index) throws IOException {
-        CategoryJson catJson = new CategoryJson();
-        categoryChosen = catJson.getCategory(catsToChooseFrom.get(index).getId());
+        CategoryRepository catJson = new CategoryRepository();
+        categoryChosen = catJson.getCategory(Integer.toString(catsToChooseFrom.get(index).getId()));
         setUpQuestions();
     }
 
