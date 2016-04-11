@@ -52,7 +52,7 @@ public class GetJSONData {
     }
 
 //    Same as above but with queries. Accepts a set to limit which queries to use; you can just use the
-//    Map.keyset as the set to use all queries.
+//    Map.keySet as the set to use all queries.
 public void requestJsonFromWebWithParamQueries(Set<String> keys) throws IOException {
         String parameters = "?";
         for (String key : keys) {

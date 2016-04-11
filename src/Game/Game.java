@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class Game {
     private final int amountOfQuestionsInGame;
-    private final int minAmountOfCluesInCategory;  // will control the minimum amount of clues a cateogry has; too little means that the multiple choices might have duplicate answers.
+    private final int minAmountOfCluesInCategory;  // will control the minimum amount of clues a category has; too little means that the multiple choices might have duplicate answers.
     private List<Question> questionsList;
     private int MAX_SCORE;
 
@@ -32,11 +32,11 @@ public class Game {
     protected void setQuestionsList(List<Question> q) {
         questionsList = q;
 
-        int scoreAccum = 0;
+        int scoreAccrue = 0;
         for (Question question : questionsList) {
-            scoreAccum += question.getCLUE().getValue();
+            scoreAccrue += question.getCLUE().getValue();
         }
-        this.MAX_SCORE = scoreAccum;
+        this.MAX_SCORE = scoreAccrue;
     }
 
     protected void setUpQuestions(List<Clue> clues) {

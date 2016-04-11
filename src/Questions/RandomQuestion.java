@@ -8,12 +8,12 @@ import java.util.ArrayList;
 
 public class RandomQuestion extends Question {
 
-    private final CategoryRepository categoryRepository = new CategoryRepository();
-
     public RandomQuestion(Clue clue) throws IOException {
         super(clue);
 
-        setAnswerMultipleChoice((ArrayList<Clue>) categoryRepository.getCategory(Integer.toString(getCLUE().getCategoryId())).getClues());
+        CategoryRepository categoryRepository = new CategoryRepository();
+        setAnswerMultipleChoice((ArrayList<Clue>) categoryRepository
+                .getCategory(Integer.toString(getCLUE().getCategoryId())).getClues());
     }
 
 }
