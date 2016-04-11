@@ -1,35 +1,42 @@
 package tests;
 
-import GetJsonData.RandomQuestionsJson;
+import GetJsonData.RandomQuestionsRepository;
 import Questions.Clue;
 import com.google.gson.Gson;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertNotNull;
 
 
-public class RandomQuestionsJsonTest {
+public class RandomQuestionsRepositoryTest {
 
-    RandomQuestionsJson json;
-    Gson gson = new Gson();
+    private RandomQuestionsRepository json;
+    private Gson gson = new Gson();
 
     @Before
     public void setUp() throws Exception {
-        json = new RandomQuestionsJson();
+        json = new RandomQuestionsRepository();
     }
 
     @Test
-    public void testRequestRandomClueJsonFromWeb() throws Exception {
+    public void testRequestRandomClueFromWeb() throws IOException {
         json.requestJsonFromWeb();
+//        Because lastJsonResponse is initialized to null, if the request was successful then it should not
+//        be null.
         assertNotNull(json.getLastJsonResponse());
     }
 
     @Test
-    public void testRequestMultipleRandomCluesJson() throws Exception {
-        json.requestMultipleRandomCluesJson(1);
+    public void testRequestMultipleRandomCluesFromWeb() throws Exception {
+        json.requestMultipleRandomCluesFromWeb(5);
         Clue[] clues = gson.fromJson(json.getLastJsonResponse(), Clue[].class);
-        assertNotNull(clues);
+
+        for (Clue clue : clues) {
+            assertNotNull(clue);
+        }
     }
 
     @Test

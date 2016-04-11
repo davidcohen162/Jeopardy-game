@@ -7,61 +7,61 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class CategoriesJson extends GetJSONData {
+public class CategoriesRepository extends GetJSONData {
 
     public static final int MAX_OFFSET = 18416;
     //    The maximum categories you can request in one request.
     public static final int MAX_CATEGORIES_REQUEST = 100;
-    //      countQuery: an optional parameter to request more than 1 category at a time. Currently limited to 100
-    private static final String countQuery = "count";
+    //      COUNT_PARAM: an optional parameter to request more than 1 category at a time. Currently limited to 100
+    public static final String COUNT_PARAM = "count=";
     //    By default the request will always return the same categories starting from x. Setting the Offset will return
 //    categories starting from the offset number.
-    private static final String offsetQuery = "offset";
+    public static final String OFFSET_PARAM = "offset=";
     private Random rand = new Random();
 
-    public CategoriesJson() {
+    public CategoriesRepository() {
         super("http://jservice.io/api/categories");
     }
 
     public int getCountAmount() {
         try {
-            return Integer.parseInt(getQueryValue(CategoriesJson.countQuery));
+            return Integer.parseInt(getQueryValue(CategoriesRepository.COUNT_PARAM));
         } catch (RuntimeException e) {
             return -1;
         }
     }
 
-    private void setCountAmount(int count) {
-        addParameterQuery(CategoriesJson.countQuery, Integer.toString(count));
+    private void setCountAmount(String count) {
+        addParameterQuery(CategoriesRepository.COUNT_PARAM, count);
     }
 
     public int getOffsetAmount() {
         try {
-            return Integer.parseInt(getQueryValue(CategoriesJson.offsetQuery));
+            return Integer.parseInt(getQueryValue(CategoriesRepository.OFFSET_PARAM));
         } catch (RuntimeException e) {
             return -1;
         }
     }
 
     private void setOffsetAmount(int offsetAmount) {
-        addParameterQuery(CategoriesJson.offsetQuery, Integer.toString(offsetAmount));
+        addParameterQuery(CategoriesRepository.OFFSET_PARAM, Integer.toString(offsetAmount));
     }
 
-    public void requestCategoriesJsonFromWeb(int count, int offSet) throws IOException {
+    public void requestCategoriesJsonFromWeb(String count, int offSet) throws IOException {
         setCountAmount(count);
         setOffsetAmount(offSet);
 
-        requestJsonFromWebWithQueries(getParametersMap().keySet());
+        requestJsonFromWebWithParamQueries(getParametersMap().keySet());
     }
 
-    public Category[] getArrayOfCategories(int count, int offSet) throws IOException {
+    public Category[] getArrayOfCategories(String count, int offSet) throws IOException {
         requestCategoriesJsonFromWeb(count, offSet);
         Category[] categories = gson.fromJson(getLastJsonResponse(), Category[].class);
         return categories;
     }
 
-    public Category[] getArrayOfRandomCats(int amountOfCategoriesToGet) throws IOException {
-        return getArrayOfCategories(amountOfCategoriesToGet, rand.nextInt(MAX_OFFSET - amountOfCategoriesToGet));
+    public Category[] getArrayOfRandomCats(String amountOfCategoriesToGet) throws IOException {
+        return getArrayOfCategories(amountOfCategoriesToGet, rand.nextInt(MAX_OFFSET - Integer.parseInt(amountOfCategoriesToGet)));
     }
 
     public ArrayList<Category> getArrayListOfCatsWithMoreThan_n_Clues(int amountOfCatsToGet, int amountOfClues) throws IOException {
@@ -70,7 +70,7 @@ public class CategoriesJson extends GetJSONData {
 //        Main loop will continue as long as we don't have the amount of categories that was requested.
         int amountOfCatsWeGot = 0;
         while (amountOfCatsWeGot < amountOfCatsToGet) {
-            Category[] randomCategories = getArrayOfRandomCats(25);
+            Category[] randomCategories = getArrayOfRandomCats("25");
 
 /*          This loop iterates through the array of the latest request we made for Categories, and checks each one to if it has
             more than amountOfClues. If it does it gets added to the ArrayList.

@@ -6,38 +6,38 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class RandomQuestionsJson extends GetJSONData {
-    public static final String countQuery = "count";
+public class RandomQuestionsRepository extends GetJSONData {
+    public static final String COUNT_PARAM = "count=";
 
-    public RandomQuestionsJson() {
+    public RandomQuestionsRepository() {
         super("http://jservice.io/api/random");
     }
 
 
     //    limited to 100
     private void setCountParameter(int count) {
-        addParameterQuery(RandomQuestionsJson.countQuery, Integer.toString(count));
+        addParameterQuery(RandomQuestionsRepository.COUNT_PARAM, Integer.toString(count));
     }
 
 
-    public void requestRandomClueJsonFromWeb() throws IOException {
+    public void requestRandomClueFromWeb() throws IOException {
         requestJsonFromWeb();
     }
 
     //    Assumes count was set
-    public void requestMultipleRandomCluesJson(int count) throws IOException {
+    public void requestMultipleRandomCluesFromWeb(int count) throws IOException {
         setCountParameter(count);
-        requestJsonFromWebWithQueries(getParametersMap().keySet());
+        requestJsonFromWebWithParamQueries(getParametersMap().keySet());
     }
 
     public Clue getRandomClueObject() throws IOException {
-        requestRandomClueJsonFromWeb();
+        requestRandomClueFromWeb();
         Clue[] clues = gson.fromJson(getLastJsonResponse(), Clue[].class);
         return clues[0];
     }
 
     public Clue[] getManyRandomClueObjects(int howManyCluesToGet) throws IOException {
-        requestMultipleRandomCluesJson(howManyCluesToGet);
+        requestMultipleRandomCluesFromWeb(howManyCluesToGet);
         Clue[] clues = gson.fromJson(getLastJsonResponse(), Clue[].class);
         return clues;
     }

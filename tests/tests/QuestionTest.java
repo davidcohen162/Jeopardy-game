@@ -1,7 +1,7 @@
 package tests;
 
-import GetJsonData.CategoryJson;
-import GetJsonData.RandomQuestionsJson;
+import GetJsonData.CategoryRepository;
+import GetJsonData.RandomQuestionsRepository;
 import Questions.Clue;
 import Questions.Question;
 import com.google.gson.Gson;
@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class QuestionTest {
 
     private Question question;
-    private RandomQuestionsJson questionsJson = new RandomQuestionsJson();
+    private RandomQuestionsRepository questionsJson = new RandomQuestionsRepository();
     private Gson gson = new Gson();
 
     @Before
@@ -27,8 +27,8 @@ public class QuestionTest {
 
     @Test
     public void testSetAnswers() throws IOException {
-        CategoryJson categoryJson = new CategoryJson();
-        question.setAnswerMultipleChoice((ArrayList<Clue>) categoryJson.getCategory(question.getCLUE().getCategoryId()).getClues());
+        CategoryRepository categoryRepository = new CategoryRepository();
+        question.setAnswerMultipleChoice((ArrayList<Clue>) categoryRepository.getCategory(Integer.toString(question.getCLUE().getCategoryId())).getClues());
         for (int i = 0; i < question.INCORRECT_ANSWER_CHOICES + 1; i++) {
             assertNotNull(question.getAnswerFromMultipleChoice(i));
         }
@@ -41,8 +41,8 @@ public class QuestionTest {
 
     @Test
     public void testSetAnsweredCorrectly() throws IOException {
-        CategoryJson categoryJson = new CategoryJson();
-        question.setAnswerMultipleChoice((ArrayList<Clue>) categoryJson.getCategory(question.getCLUE().getCategoryId()).getClues());
+        CategoryRepository categoryRepository = new CategoryRepository();
+        question.setAnswerMultipleChoice((ArrayList<Clue>) categoryRepository.getCategory(Integer.toString(question.getCLUE().getCategoryId())).getClues());
 
         question.setAnsweredCorrectly(question.getCLUE().getAnswer());
 
@@ -51,8 +51,8 @@ public class QuestionTest {
 
     @Test
     public void answeredCorrectlyIsFalseWhenPassedAWrongAnswer() throws IOException {
-        CategoryJson categoryJson = new CategoryJson();
-        question.setAnswerMultipleChoice((ArrayList<Clue>) categoryJson.getCategory(question.getCLUE().getCategoryId()).getClues());
+        CategoryRepository categoryRepository = new CategoryRepository();
+        question.setAnswerMultipleChoice((ArrayList<Clue>) categoryRepository.getCategory(Integer.toString(question.getCLUE().getCategoryId())).getClues());
 
         question.setAnsweredCorrectly("The truth is like poetry. And most people hates poetry");
         assertFalse(question.isAnsweredCorrectly());

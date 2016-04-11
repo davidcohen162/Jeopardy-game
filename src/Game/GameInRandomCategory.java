@@ -1,6 +1,6 @@
 package Game;
 
-import GetJsonData.CategoryJson;
+import GetJsonData.CategoryRepository;
 import Questions.Category;
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class GameInRandomCategory extends Game {
     }
 
     public void setUpQuestions() throws IOException {
-        CategoryJson catJson = new CategoryJson();
+        CategoryRepository catJson = new CategoryRepository();
         Category category = catJson.getRandomCatWith_n_Clues(getMinAmountOfCluesInCategory());
 
         super.setUpQuestions(category.getClues());

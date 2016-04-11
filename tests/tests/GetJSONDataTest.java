@@ -1,5 +1,6 @@
 package tests;
 
+import GetJsonData.CategoriesRepository;
 import GetJsonData.GetJSONData;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -16,13 +17,13 @@ import static org.junit.Assert.*;
 
 public class GetJSONDataTest {
 
+    private static String jsonToTestAgainst = "";
     private GetJSONData JsonData;
     private String baseUrlOfAPI = "http://jservice.io/api/categories";
-    private static String jsonToTestAgainst = "";
 
     @BeforeClass
     public static void setJsonForCategory5() throws FileNotFoundException {
-        java.io.File file = new java.io.File("jsonToTestAgainst.json");
+        java.io.File file = new java.io.File("tests/jsonToTestAgainst.json");
         Scanner input = new Scanner(file);
 
         if (!input.hasNext()) {
@@ -62,21 +63,21 @@ public class GetJSONDataTest {
 
     @Test
     public void testRequestJsonFromWebWithQueries() throws IOException {
-        JsonData.addParameterQuery("count", "50");
-        JsonData.requestJsonFromWebWithQueries(JsonData.getParametersMap().keySet());
+        JsonData.addParameterQuery(CategoriesRepository.COUNT_PARAM, "50");
+        JsonData.requestJsonFromWebWithParamQueries(JsonData.getParametersMap().keySet());
 
         assertEquals(jsonToTestAgainst, JsonData.getLastJsonResponse());
     }
 
     @Test
     public void RequestWithQueriesIgnoresParametersNotPassedByKeyset() throws IOException {
-        JsonData.addParameterQuery("count", "50");
-        JsonData.addParameterQuery("offset", "100");
+        JsonData.addParameterQuery(CategoriesRepository.COUNT_PARAM, "50");
+        JsonData.addParameterQuery(CategoriesRepository.OFFSET_PARAM, "100");
 
         HashSet<String> set = new HashSet<>();
-        set.add("count");
+        set.add(CategoriesRepository.COUNT_PARAM);
 
-        JsonData.requestJsonFromWebWithQueries(set);
+        JsonData.requestJsonFromWebWithParamQueries(set);
         assertEquals(jsonToTestAgainst, JsonData.getLastJsonResponse());
     }
 

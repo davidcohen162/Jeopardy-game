@@ -13,11 +13,12 @@ public class GetJSONData {
 
     //
     protected static Gson gson = new Gson();
+    protected Response response;
     //    The base url of the api, in this case http://jservice.io/api/
     private String baseUrlString;
     //Add query parameters here, as needed.
     private HashMap<String, String> parameters;
-    private static OkHttpClient client = new OkHttpClient();
+    private OkHttpClient client = new OkHttpClient();
     private String jsonResponse;
 
     public GetJSONData(String urlString) {
@@ -52,11 +53,11 @@ public class GetJSONData {
 
 //    Same as above but with queries. Accepts a set to limit which queries to use; you can just use the
 //    Map.keyset as the set to use all queries.
-    public void requestJsonFromWebWithQueries(Set<String> keys) throws IOException {
+public void requestJsonFromWebWithParamQueries(Set<String> keys) throws IOException {
         String parameters = "?";
         for (String key : keys) {
             if (this.parameters.containsKey(key)) {
-                parameters += key + "=" + this.parameters.get(key) + "&";
+                parameters += key + this.parameters.get(key) + "&";
             } else {
                 throw new RuntimeException("Parameter not set.");
             }
@@ -65,7 +66,7 @@ public class GetJSONData {
                 .url(this.baseUrlString + parameters)
                 .build();
 
-        Response response = client.newCall(request).execute();
+    response = client.newCall(request).execute();
 
         if (!response.isSuccessful()) {
             throw new IOException("Unexpected code " + response);
